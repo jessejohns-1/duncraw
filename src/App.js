@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import storyElements from './storyElements';
-import landing from '/images/landing.jpg';
+import landing from './image/start_background.png';
 
 function App() {
   const [gameText, setGameText] = useState('Welcome to the game! Press "Start" to begin.');
   const [currentElement, setCurrentElement] = useState(null);
+  const [userName, setUserName] = useState('');
   const [userInput, setUserInput] = useState('');
 
   const handleChoiceClick = (choice) => {
@@ -13,40 +14,55 @@ function App() {
     setCurrentElement(nextElement);
   };
 
-  const startGame = () => {
-    setGameText(storyElements[0].text);
+  const startGame = (name) => {
+    setUserName(name);
+    setGameText(`Welcome, ${name}! ${storyElements[0].text}`);
     setCurrentElement(storyElements[0]);
   };
 
 
   const getBackgroundStyle = () => {
-    if (!currentElement) {
-      return landing;
+    if (!currentElement || !currentElement.background) {
+      return {
+        backgroundImage: `url(${landing})`,
+      };
+    } else {
+      return {
+        backgroundImage: `url(${currentElement.background})`,
+      };
     }
-    return {
-      backgroundImage: `url(${currentElement.background})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    };
   };
 
-
+  
   return (
-    <div className="App" style={getBackgroundStyle()}>
+    <div className="App">
+      <div
+        className="image-container"
+        style={getBackgroundStyle()}
+      ></div>
       <div className="content">
-        <h1>Text-based Game</h1>
-        <div>
-          <p>{gameText}</p>
-          {currentElement &&
-            currentElement.choices.map((choice) => (
-              <button key={choice.id} onClick={() => handleChoiceClick(choice)}>
-                {choice.text}
-              </button>
-            ))}
-          {!currentElement && (
-            <button onClick={startGame}>Start</button>
-          )}
-        </div>
+        <h1>Welcome to Duncraw</h1>
+        {!userName ? (
+          <div>
+            <input
+              type="text"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              placeholder="Enter your name..."
+            />
+            <button onClick={() => startGame(userInput)}>Submit</button>
+          </div>
+        ) : (
+          <div>
+            <p>{gameText}</p>
+            {currentElement &&
+              currentElement.choices.map((choice) => (
+                <button key={choice.id} onClick={() => handleChoiceClick(choice)}>
+                  {choice.text}
+                </button>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );

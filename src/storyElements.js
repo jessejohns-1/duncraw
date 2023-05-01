@@ -33,12 +33,29 @@ const storyElements = [
   ],
   },
   {
-  id: 9,
-  text: "With a blend of fear and excitement, you delve deeper into the unknown. You stumble upon another hidden courtyard, this one containing a more complex riddle etched on a large stone tablet. It reads: 'I am taken from a mine, and shut up in a wooden case, from which I am never released, and yet I am used by almost every person. What am I?' You carefully ponder the riddle and consider the possible answers.",
+  id: 7,
+  text: "Hesitantly, you offer your answer: 'A ghost.' The stone plaque remains unchanged, and you feel your heart sink with disappointment. The treasure hunt appears to be over for you. Dejected, you return to the city streets, wondering how the townspeople will react to your failure.",
   background: "",
   choices: [
-  { id: 1, text: "Answer: 'A pencil'", nextElement: 10 },
+  { id: 1, text: "Face the townspeople with your head held high", nextElement: 15 },
   ],
+  },
+  {
+  id: 15,
+  text: "Despite your failure, you decide to face the townspeople with your head held high. As you return to the city square, you can sense their disappointment. The mayor, however, commends your effort and encourages you to try again in future challenges. Though disheartened, you take solace in the fact that you had the courage to try, and the experience has taught you valuable lessons.",
+  background: "",
+  choices: [
+  { id: 1, text: "Look for your next adventure", nextElement: 14 },
+  ],
+  },
+  {
+    id: 9,
+    text: "With a blend of fear and excitement, you delve deeper into the unknown. You stumble upon another hidden courtyard, this one containing a more complex riddle etched on a large stone tablet. It reads: 'I am taken from a mine, and shut up in a wooden case, from which I am never released, and yet I am used by almost every person. What am I?' You carefully ponder the riddle and consider the possible answers.",
+    background: "",
+    choices: [
+      { id: 1, text: "Answer: 'A gem'", nextElement: 15 },
+      { id: 2, text: "Answer: 'A pencil'", nextElement: 10 },
+    ],
   },
   {
   id: 10,
@@ -65,28 +82,33 @@ const storyElements = [
   ],
   },
   {
-    id: 13,
-    text: "You locate the mayor in the town square, encircled by curious onlookers. He acknowledges you with a nod and signals you over. With a dramatic flourish, he presents you with a 'gift' to commemorate your victory. Your excitement quickly turns to confusion as you realize he's handed you a simple, mundane t-shirt. The mayor seems oblivious to your disappointment, and the crowd cheers, baffled by the odd prize. You put on a brave face, masking your dismay. Despite the underwhelming reward, you've made a name for yourself in Duncraw through your hard work and determination.",
-    background: "",
-    inventoryAction: {
-    type: "add",
-    item: {
-    name: "a t-shirt",
-    type: "outfit",
-    },
-    },
-  choices: [
-  { id: 1, text: "Look for your next adventure", nextElement: 14 },
-  ],
-  },
-  {
-  id: 14,
-  text: "As the cheers fade and the crowd disperses, you find yourself in the bustling city of Duncraw once more. Your mind races with possibilities, wondering what adventures await. Excitement and anticipation fill you, knowing that anything is possible in this city of opportunities. You take a deep breath and step forward, ready to face whatever comes your way.",
+  id: 13,
+  text: "You locate the mayor in the town square, encircled by curious onlookers. He acknowledges you with a nod and signals you over. With a dramatic flourish, he presents you with a 'gift' to commemorate your victory. Your excitement quickly turns to confusion as you realize he's handed you a simple, mundane t-shirt. The mayor seems oblivious to your disappointment, and the crowd cheers, baffled by the odd prize. You put on a brave face, masking your dismay. Despite the underwhelming reward, you've made a name for yourself in Duncraw through your hard work and determination.",
+  background: "",
+  inventoryAction: {
+  type: "add",
+  item: {  name: "a t-shirt",
+  type: "outfit",
+},
+},
+choices: [
+{ id: 1, text: "Look for your next adventure", nextElement: 14 },
+],},
+{
+id: 14,
+text: "As the cheers fade and the crowd disperses, you find yourself in the bustling city of Duncraw once more. Your mind races with possibilities, wondering what adventures await. Excitement and anticipation fill you, knowing that anything is possible in this city of opportunities. You take a deep breath and step forward, ready to face whatever comes your way.",
+background: "",
+choices: [
+{ id: 1, text: "To be continued", nextElement: 1 },
+],
+},{
+  id: 15,
+  text: "With uncertainty, you answer: 'A gem.' The stone tablet remains unchanged, and you realize your mistake. Disheartened, you return to the city, where the townspeople greet you with a mix of sympathy and disappointment. You failed to find the treasure, but the experience has taught you valuable lessons. Now, you seek redemption and another chance to prove yourself.",
   background: "",
   choices: [
-  { id: 1, text: "to be continued", nextElement: 1},
+    { id: 1, text: "Look for another adventure", nextElement: 14 },
   ],
-  },
-  ];
-  
-  export default storyElements;
+},
+];
+
+export default storyElements;

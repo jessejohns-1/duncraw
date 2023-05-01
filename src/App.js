@@ -32,7 +32,9 @@ function App() {
   };
 
   const addItemToInventory = (item) => {
-    setInventory((prevInventory) => [...prevInventory, item]);
+    if (!inventory.some((existingItem) => existingItem.name === item.name)) {
+      setInventory((prevInventory) => [...prevInventory, item]);
+    }
   };
 
   const getBackgroundStyle = () => ({

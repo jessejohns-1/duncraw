@@ -272,7 +272,7 @@ choices: [
           text: "Thank you for playing! This is the end of the demo. Please check back soon for updates!",
           background: "",
           choices: [
-          ]
+        ]
           }
       
       

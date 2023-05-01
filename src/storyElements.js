@@ -241,12 +241,33 @@ choices: [
         id: 31,
         text: "As you and Mystic make your way through the winding streets of Duncraw, you can't help but notice the peculiar bond that seems to be forming between you. The once-lost dog now trots along happily by your side, occasionally stopping to sniff out interesting scents and explore hidden corners of the city. Together, you navigate your way out of the city, following a narrow path that leads through dense forests and across babbling brooks. Along the way, you meet fascinating creatures that inhabit the woodland, such as a family of talking squirrels who share their stash of acorns, and a wise old owl who offers cryptic advice on life and destiny.\n\nThe journey to the witch's hut is long and arduous, but you remain steadfast in your mission to return Mystic to his owner. As the two of you grow closer, you tell him stories, enjoying each other's company more than you ever thought possible. Mystic proves to be a loyal and resourceful companion, using his keen senses to guide you through the increasingly treacherous terrain. The further you venture from the city, the wilder and more untamed the landscape becomes, presenting you with new challenges at every turn.\n\nAt last, you reach the witch's hut, nestled at the edge of a dark and foreboding swamp. The gnarled wooden structure looks as though it has been there for centuries, its timbers twisted and weathered by the elements. As you approach the door, Mystic excitedly barks and bounds up the steps, wagging his tail furiously. The door creaks open, and a wizened old woman emerges from the shadows, eyeing you and Mystic with suspicion.\n\n'What are you doing with my grandson?' she asks, her voice laced with anger. 'He's a child wizard, not a dog. How dare you take him without my permission!'\n\nMystic's eyes light up at the sight of his grandmother. 'Please, Grandma,' he pleads. 'I want to go on adventures with them. I want to see the world outside our village.'\n\nThe witch looks down at her grandson, her expression softening. She turns to you, her eyes piercing. 'Can I trust you to take care of him and keep him safe on your travels?'\n\nYou nod, eager to take Mystic with you on your adventures. 'I promise to keep him safe and teach him everything I know about the outside world,' you say.\n\nThe witch studies you for a moment, as if weighing your words. Finally, she nods. 'Very well,' she says. 'You may take Mystic with you, but remember – he is still a child, and he must be protected at all times.'\n\nOverjoyed by the witch's permission, you set out into the wilderness with Mystic as your eager companion.",
         background: "",
+        inventoryAction: {
+          type: "add",
+          item: {  name: "Mystic",
+          type: "companion",
+        },
+        },
         choices: [
-          { id: 1, text: "Say your farewells and embark on your next adventure( i haven't finished thissss so end at the moment lol)", nextElement: 32 }
+          { id: 1, text: "Say your farewells and embark on your next adventure", nextElement: 32 }
         ]
-      }
+      },{
+        id: 32,
+        text: "As you and Mystic continue your journey through the dense forest, the Boy suddenly stops in his tracks and turns to you. 'I have to tell you something,' he says, his expression serious. 'I need to find my talisman it's the only way to break a terrible curse that's befallen my village.'\n\nYou're taken aback by this revelation. 'What kind of curse?' you ask.\n\n'The village is slowly being destroyed by a dark force that we cannot fight,' the Boy explains. 'But the talisman has the power to banish it forever. I must find it before it's too late.'\n\nYou nod, understanding the gravity of the situation. 'Do you have any idea where it might be?' you ask.\n\nThe Boy nods. 'Legend has it that it's hidden within an ancient underground cavern, guarded by fierce beasts and deadly traps. It's a treacherous journey, but we have to try.'\n\nWith newfound determination, you set out to find the cavern, knowing that the fate of the Boy's village rests in your hands.",
+        background: "",
+        choices: [
+          { id: 1, text: "Embark on the quest to find the talisman and save the Boy's village", nextElement: 33 }
+        ]
+      },
+      {
+        id: 33,
+        text: "You and Mystic set out on your epic quest to find the mystical talisman, determined to save the Boy's village from its cursed fate. But the journey is anything but easy. You've asked everyone you've come across if they've heard of the underground labyrinth, and the responses have been...less than helpful.\n\nOne grizzled old man said, 'The what? You mean the labyrinth of lost socks? That's a myth, kid.' Another person, clearly delusional, claimed that the labyrinth was actually a secret entrance to an underground disco party.\n\nBut the Boy remains steadfast, insisting that the talisman is real and that you must find it. So, you continue your search, determined to prove the naysayers wrong and find the fabled talisman.\n\nFinally, in a small hamlet tucked away in the mountains, you hear a rumor that sets your heart racing. A local storyteller whispers of an ancient labyrinth hidden deep beneath the earth, guarded by vicious monsters and deadly traps. The talisman is said to be hidden within its walls, waiting for a hero to claim it.\n\nYou take a deep breath, ready to face the dangers that lie ahead. You've come too far to give up now. It's time to embark on the greatest adventure of your lives!",
+        background: "",
+        choices: [
+        { id: 1, text: "Press on towards the mountains and the underground labyrinth(TO BE CONTINUEDDD)", nextElement: 34 }
+        ]
+        }
       
-
+      
 
     ];
 

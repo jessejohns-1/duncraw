@@ -44,7 +44,7 @@ function App() {
       <div className="image-container" style={getBackgroundStyle()} />
       <div className="content">
         <div className="inventory-box">
-          <p>Inventory:</p>
+          <p>Inventory & Companion:</p>
           <ul>
             {inventory.map((item, index) => (
               <li key={index}>

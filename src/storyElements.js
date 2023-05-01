@@ -164,22 +164,71 @@ choices: [
     { id: 2, text: "Return to the treasure hunt", nextElement: 4 },
     ],
     },
-    {
-    id: 21,
-    text: "Embarking on a new adventure with the secret society, you become part of a larger quest to protect Duncraw and its hidden secrets. As a valued member of the society, you face countless challenges and forge lasting friendships. Your experiences in Duncraw have forever changed you, turning you into a seasoned adventurer and a guardian of the city's ancient mysteries.",
-    background: "",
-    choices: [
-    { id: 1, text: "To be continued...", nextElement: 1 },
+   
+{
+  id: 21,
+  text: "Embarking on a new adventure with the secret society, you become part of a larger quest to protect Duncraw and its hidden secrets. As a valued member of the society, you face countless challenges and forge lasting friendships. Your experiences in Duncraw have forever changed you, turning you into a seasoned adventurer and a guardian of the city's ancient mysteries.",
+  background: "",
+  choices: [
+  { id: 1, text: "To be continued...", nextElement: 25 },
   ],
   },
   {
-  id: 22,
-  text: "Embracing your newfound destiny, you become a key figure in uncovering and preserving the ancient civilization's secrets. As you delve deeper into Duncraw's hidden history, you face countless challenges and form unlikely alliances. The once simple treasure hunt has evolved into a grand adventure, one that shapes not only your fate but the future of the city itself.",
+  id: 25,
+  text: "In your pursuit of preserving the ancient civilization's secrets, you stumble upon a long-forgotten temple. The temple's entrance is guarded by a massive stone statue that only speaks in riddles. To gain entry, you must make the statue laugh with a clever response to its riddle. The statue poses the following riddle: 'What has keys but can't open locks?'",
   background: "",
   choices: [
-  { id: 1, text: "To be continued...", nextElement: 1 },
+  { id: 1, text: "Answer: 'A piano'", nextElement: 26 },
   ],
   },
-  ];
+  {
+  id: 26,
+  text: "You confidently answer, 'A piano!' To your surprise, the stone statue begins to chuckle. Its laughter grows louder and more boisterous, shaking the ground beneath your feet. The temple's entrance creaks open, revealing an enormous room filled with ancient relics and... whoopee cushions? As you step inside, it becomes clear that this temple was once a sanctuary dedicated to humor and laughter. The walls are lined with jokes, riddles, and illustrations of people engaged in slapstick antics.",
+  background: "",
+  choices: [
+  { id: 1, text: "Explore the temple further", nextElement: 27 },
+  ],
+  },
+  {
+  id: 27,
+  text: "As you explore the temple, you can't help but laugh at the absurdity of it all. You and your companions find yourselves embroiled in a series of hilarious mishaps and comedic accidents. From narrowly avoiding a rogue pie in the face to accidentally stepping on a rake, the entire experience becomes a lighthearted romp through an ancient comedic playground.",
+  background: "",
+  choices: [
+  { id: 1, text: "Exit the temple with your new memories", nextElement: 28 },
+  ],
+  },
+  {
+  id: 28,
+  text: "With your spirits lifted and your sides aching from laughter, you leave the temple behind. The secret society welcomes your hilarious tales, as the joy of laughter spreads throughout Duncraw. Your adventures become the stuff of legends, with tales of your comedic exploits told and retold for generations to come. In the end, you're not just a guardian of the city's ancient mysteries, but also the bringer of laughter and joy.",
+  background: "",
+  choices: [
+  { id: 1, text: "The end", nextElement: 1 },
+  ],
+  },
+  {
+    id: 22,
+    text: "Embracing your newfound destiny, you become a key figure in uncovering and preserving the ancient civilization's secrets. As you delve deeper into Duncraw's hidden history, you face countless challenges and form unlikely alliances. The once simple treasure hunt has evolved into a grand adventure, one that shapes not only your fate but the future of the city itself.",
+    background: "",
+    choices: [
+    { id: 1, text: "Continue exploring the ancient civilization", nextElement: 23 },
+    ],
+    },
+    {
+    id: 23,
+    text: "As you continue to explore the secrets of the ancient civilization, you encounter unexpected perils. One fateful day, you and your companions venture into a long-lost tomb. The tomb is filled with intricate traps and puzzles, designed to deter any intruders from uncovering its secrets. As your party navigates through the tomb, you accidentally trigger one of the traps, causing the chamber to flood with water.",
+    background: "",
+    choices: [
+    { id: 1, text: "Attempt to escape the chamber", nextElement: 24 },
+    ],
+    },
+    {
+    id: 24,
+    text: "With water rushing in, panic sets in as you and your companions desperately try to escape the chamber. Despite your best efforts, the water rises too quickly, and you realize that there's no way out. As the last bit of air disappears, you and your companions succumb to the cold embrace of the tomb. The secrets of the ancient civilization remain buried, and the city of Duncraw loses its greatest adventurer. Your story ends here, a tragic reminder of the dangers that come with unearthing the past.",
+    background: "",
+    choices: [
+    { id: 1, text: "The end", nextElement: 1 },
+    ],
+    },
+    ];
 
 export default storyElements;

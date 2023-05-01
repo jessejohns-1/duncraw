@@ -1,0 +1,7 @@
+export const shouldBreakOrExtinguish = (itemType) => {
+  if (itemType === "weapon") {
+    const chance = Math.floor(Math.random() * 100) + 1;
+    return chance <= 60;
+  }
+  return false;
+};

@@ -7,40 +7,54 @@ function App() {
   const [currentElement, setCurrentElement] = useState(null);
   const [userName, setUserName] = useState('');
   const [userInput, setUserInput] = useState('');
+  const [inventory, setInventory] = useState([]);
 
   const handleChoiceClick = (choice) => {
     const nextElement = storyElements.find((el) => el.id === choice.nextElement);
     setGameText(nextElement.text);
     setCurrentElement(nextElement);
+    if (nextElement.inventoryAction) {
+      setInventory((prevInventory) => [...prevInventory, nextElement.inventoryAction.item]);
+    }
   };
 
   const startGame = (name) => {
     setUserName(name);
-    setGameText(`Welcome, ${name}! ${storyElements[0].text}`);
-    setCurrentElement(storyElements[0]);
-  };
-
-
-  const getBackgroundStyle = () => {
-    if (!currentElement || !currentElement.background) {
-      return {
-        backgroundImage: `url(${landing})`,
-      };
-    } else {
-      return {
-        backgroundImage: `url(${currentElement.background})`,
-      };
+    const firstElement = storyElements[0];
+    if (firstElement.inventoryAction) {
+      setInventory((prevInventory) => {
+        const newInventory = [...prevInventory, firstElement.inventoryAction.item];
+        return newInventory;
+      });
     }
+    setGameText(`Welcome, ${name}! ${firstElement.text}`);
+    setCurrentElement(firstElement);
   };
 
-  
+  const addItemToInventory = (item) => {
+    setInventory((prevInventory) => [...prevInventory, item]);
+  };
+
+  const getBackgroundStyle = () => ({
+    backgroundImage: `url(${currentElement?.background || landing})`,
+  });
+
   return (
     <div className="App">
-      <div
-        className="image-container"
-        style={getBackgroundStyle()}
-      ></div>
+      <div className="image-container" style={getBackgroundStyle()} />
       <div className="content">
+        <div className="inventory-box">
+          <p>Inventory:</p>
+          <ul>
+            {inventory.map((item, index) => (
+              <li key={index}>
+              <div>
+                <strong>{item.name}</strong>
+              </div>
+            </li>
+            ))}
+          </ul>
+        </div>
         <h1>Welcome to Duncraw</h1>
         {!userName ? (
           <div>
@@ -55,17 +69,24 @@ function App() {
         ) : (
           <div>
             <p>{gameText}</p>
-            {currentElement &&
-              currentElement.choices.map((choice) => (
-                <button key={choice.id} onClick={() => handleChoiceClick(choice)}>
-                  {choice.text}
-                </button>
-              ))}
+            {currentElement?.choices.map((choice) => (
+              <button
+                key={choice.id}
+                onClick={() => {
+                  if (choice.item) {
+                    addItemToInventory(choice.item);
+                  }
+                  handleChoiceClick(choice);
+                }}
+              >
+                {choice.text}
+              </button>
+            ))}
           </div>
         )}
       </div>
     </div>
   );
-}
+};
 
 export default App;

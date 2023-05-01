@@ -52,12 +52,12 @@ const storyElements = [
   ],
   },
   {
-  id: 15,
-  text: "Despite your failure, you decide to face the townspeople with your head held high. As you return to the city square, you can sense their disappointment. The mayor, however, commends your effort and encourages you to try again in future challenges. Though disheartened, you take solace in the fact that you had the courage to try, and the experience has taught you valuable lessons.",
-  background: "",
-  choices: [
-  { id: 1, text: "Look for your next adventure", nextElement: 14 },
-  ],
+    id: 15,
+    text: "Despite your failure, you decide to face the townspeople with your head held high. As you return to the city square, you can sense their disappointment. To your surprise, they decide to playfully tease you about your misadventure. They dress you up in a makeshift donkey costume and have you parade around the town square, plowing a small patch of dirt as a lighthearted reminder of your failed quest. As you embark on a few more adventures, you realize that your heart is no longer in it. You decide to retire from adventuring and pursue a new passion - becoming a traveling cheese salesman. With a newfound sense of purpose, you set off to explore the world of cheese, visiting exotic lands and sampling the finest cheeses the world has to offer. The end.",
+    background: "",
+    choices: [
+    { id: 1, text: "end your journey and become a traveling cheese salesman", nextElement: 1 },
+    ],
   },
   {
     id: 9,
@@ -110,7 +110,7 @@ id: 14,
 text: "As the cheers fade and the crowd disperses, you find yourself in the bustling city of Duncraw once more. Your mind races with possibilities, wondering what adventures await. Excitement and anticipation fill you, knowing that anything is possible in this city of opportunities. You take a deep breath and step forward, ready to face whatever comes your way.",
 background: "",
 choices: [
-{ id: 1, text: "To be continued", nextElement: 1 },
+{ id: 1, text: "Next", nextElement: 30 },
 ],
 },{
   id: 15,
@@ -229,6 +229,26 @@ choices: [
     { id: 1, text: "The end", nextElement: 1 },
     ],
     },
+    {
+      id: 30,
+      text: "You spend the next several days combing through Duncraw, visiting its bustling marketplaces, crowded taverns, and quiet alleyways in search of new quests. Along the way, you encounter an array of colorful characters – a one-eyed bard who sings tales of legendary heroes, a grizzled blacksmith who forges weapons imbued with magical properties, and a mischievous street magician who performs dazzling tricks for enthralled onlookers. As you delve deeper into the city, you stumble upon a small, lost dog with a distinctive collar and a name tag that reads 'Mystic.' Upon asking around, you learn that Mystic belongs to a reclusive witch who resides in a hut on the outskirts of town. Determined to reunite the dog with its owner, you offer it a treat and gently coax it to follow you as you set off on a journey to the witch's hut, hoping for a reward upon your return.",
+      background: "",
+      choices: [
+      { id: 1, text: "Embark on the journey to the witch's hut with Mystic", nextElement: 31 },
+      ],
+      },
+      {
+        id: 31,
+        text: "As you and Mystic make your way through the winding streets of Duncraw, you can't help but notice the peculiar bond that seems to be forming between you. The once-lost dog now trots along happily by your side, occasionally stopping to sniff out interesting scents and explore hidden corners of the city. Together, you navigate your way out of the city, following a narrow path that leads through dense forests and across babbling brooks. Along the way, you meet fascinating creatures that inhabit the woodland, such as a family of talking squirrels who share their stash of acorns, and a wise old owl who offers cryptic advice on life and destiny.\n\nThe journey to the witch's hut is long and arduous, but you remain steadfast in your mission to return Mystic to his owner. As the two of you grow closer, you tell him stories, enjoying each other's company more than you ever thought possible. Mystic proves to be a loyal and resourceful companion, using his keen senses to guide you through the increasingly treacherous terrain. The further you venture from the city, the wilder and more untamed the landscape becomes, presenting you with new challenges at every turn.\n\nAt last, you reach the witch's hut, nestled at the edge of a dark and foreboding swamp. The gnarled wooden structure looks as though it has been there for centuries, its timbers twisted and weathered by the elements. As you approach the door, Mystic excitedly barks and bounds up the steps, wagging his tail furiously. The door creaks open, and a wizened old woman emerges from the shadows, eyeing you and Mystic with suspicion.\n\n'What are you doing with my grandson?' she asks, her voice laced with anger. 'He's a child wizard, not a dog. How dare you take him without my permission!'\n\nMystic's eyes light up at the sight of his grandmother. 'Please, Grandma,' he pleads. 'I want to go on adventures with them. I want to see the world outside our village.'\n\nThe witch looks down at her grandson, her expression softening. She turns to you, her eyes piercing. 'Can I trust you to take care of him and keep him safe on your travels?'\n\nYou nod, eager to take Mystic with you on your adventures. 'I promise to keep him safe and teach him everything I know about the outside world,' you say.\n\nThe witch studies you for a moment, as if weighing your words. Finally, she nods. 'Very well,' she says. 'You may take Mystic with you, but remember – he is still a child, and he must be protected at all times.'\n\nOverjoyed by the witch's permission, you set out into the wilderness with Mystic as your eager companion.",
+        background: "",
+        choices: [
+          { id: 1, text: "Say your farewells and embark on your next adventure( i haven't finished thissss so end at the moment lol)", nextElement: 32 }
+        ]
+      }
+      
+
+
     ];
 
 export default storyElements;
+

@@ -174,12 +174,13 @@ choices: [
   ],
   },
   {
-  id: 25,
-  text: "In your pursuit of preserving the ancient civilization's secrets, you stumble upon a long-forgotten temple. The temple's entrance is guarded by a massive stone statue that only speaks in riddles. To gain entry, you must make the statue laugh with a clever response to its riddle. The statue poses the following riddle: 'What has keys but can't open locks?'",
-  background: "",
-  choices: [
-  { id: 1, text: "Answer: 'A piano'", nextElement: 26 },
-  ],
+    id: 25,
+    text: "In your pursuit of preserving the ancient civilization's secrets, you stumble upon a long-forgotten temple. The temple's entrance is guarded by a massive stone statue that only speaks in riddles. To gain entry, you must make the statue laugh with a clever response to its riddle. The statue poses the following riddle: 'What has keys but can't open locks?'",
+    background: "",
+    choices: [
+      { id: 1, text: "Answer: 'A piano'", isCorrect: true, nextElement: 26 },
+      { id: 2, text: "Answer: 'A banana'", isCorrect: false, nextElement: 27 },
+    ],
   },
   {
   id: 26,
@@ -202,7 +203,7 @@ choices: [
   text: "With your spirits lifted and your sides aching from laughter, you leave the temple behind. The secret society welcomes your hilarious tales, as the joy of laughter spreads throughout Duncraw. Your adventures become the stuff of legends, with tales of your comedic exploits told and retold for generations to come. In the end, you're not just a guardian of the city's ancient mysteries, but also the bringer of laughter and joy.",
   background: "",
   choices: [
-  { id: 1, text: "The end", nextElement: 1 },
+  { id: 1, text: "continue to the treasure", nextElement: 4 },
   ],
   },
   {

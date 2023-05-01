@@ -170,7 +170,7 @@ choices: [
   text: "Embarking on a new adventure with the secret society, you become part of a larger quest to protect Duncraw and its hidden secrets. As a valued member of the society, you face countless challenges and forge lasting friendships. Your experiences in Duncraw have forever changed you, turning you into a seasoned adventurer and a guardian of the city's ancient mysteries.",
   background: "",
   choices: [
-  { id: 1, text: "To be continued...", nextElement: 25 },
+  { id: 1, text: "Continue", nextElement: 25 },
   ],
   },
   {

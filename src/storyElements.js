@@ -1,28 +1,39 @@
 const storyElements = [
   {
-  id: 1,
-  text: "You stand at the entrance of the lively city of Duncraw, with merchants and townsfolk creating a cacophony of sounds. Your long journey has led you to this city of opportunities and adventures. Strolling through the bustling streets, you enjoy the laughter of playing children, the scent of fresh bread, and colorful market tapestries. You notice the city is a melting pot of cultures and races, each contributing to the vibrant urban landscape.\n\nYou come across a town crier announcing a grand event at the city square. Intrigued, you navigate the busy crowd to learn more. Upon arrival, you see a stage with a distinguished man behind a podium, likely the mayor. With great enthusiasm, he tells the crowd about a treasure hunt in Duncraw and encourages everyone to join.",
-  background: "",
-  choices: [
-  { id: 1, text: "Join the treasure hunt", nextElement: 2 },
-  ],
+    id: 1,
+    text: "You stand at the entrance of the lively city of Duncraw, with merchants and townsfolk creating a cacophony of sounds. Your long journey has led you to this city of opportunities and adventures. Strolling through the bustling streets, you enjoy the laughter of playing children, the scent of fresh bread, and colorful market tapestries. You notice the city is a melting pot of cultures and races, each contributing to the vibrant urban landscape.\n\nYou come across a town crier announcing a grand event at the city square. Intrigued, you navigate the busy crowd to learn more. Upon arrival, you see a stage with a distinguished man behind a podium, likely the mayor. With great enthusiasm, he tells the crowd about a treasure hunt in Duncraw and encourages everyone to join.",
+    background: "",
+    choices: [
+      { id: 1, text: "Join the treasure hunt", nextElement: 2 },
+      { id: 2, text: "Visit the market and prepare for the journey", nextElement: 3 },
+    ],
   },
   {
-  id: 2,
-  text: "Eager for adventure and riches, you decide to participate in the treasure hunt. The mayor hands you a mysterious map and a list of riddles. As you follow the map and solve the riddles, you face various challenges and obstacles that test your wit and courage.",
-  background: "",
-  choices: [
-  { id: 1, text: "Continue to follow the map", nextElement: 4 },
-  ],
+    id: 2,
+    text: "Eager for adventure and riches, you decide to participate in the treasure hunt. The mayor hands you a mysterious map and a list of riddles. As you follow the map and solve the riddles, you face various challenges and obstacles that test your wit and courage.",
+    background: "",
+    choices: [
+      { id: 1, text: "Continue to follow the map", nextElement: 4 },
+      { id: 2, text: "Seek assistance from the locals", nextElement: 16 },
+    ],
   },
   {
-  id: 4,
-  text: "Resolute in your quest, you traverse the winding streets and back alleys of Duncraw. As night falls, eerie shadows dance on the ancient walls and the air turns chilly. Guided by your instincts and resourcefulness, you discover a hidden courtyard with the first riddle. Inscribed on a stone plaque, it reads: 'I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?' With a blend of excitement and apprehension, you ponder the riddle and contemplate the potential answers.",
-  background: "",
-  choices: [
-  { id: 1, text: "Answer: 'An echo'", nextElement: 6 },
-  { id: 2, text: "Answer: 'A ghost'", nextElement: 7 },
-  ],
+    id: 3,
+    text: "You make your way through the bustling marketplace, looking for supplies to prepare for the treasure hunt. You purchase a sturdy backpack, a compass, and a few other essentials. As you leave the market, you overhear whispers about a secret society that has knowledge of the hidden treasure.",
+    background: "",
+    choices: [
+      { id: 1, text: "Seek out the secret society", nextElement: 17 },
+      { id: 2, text: "Ignore the whispers and follow the map", nextElement: 2 },
+    ],
+  },
+  {
+    id: 4,
+    text: "Resolute in your quest, you traverse the winding streets and back alleys of Duncraw. As night falls, eerie shadows dance on the ancient walls and the air turns chilly. Guided by your instincts and resourcefulness, you discover a hidden courtyard with the first riddle. Inscribed on a stone plaque, it reads: 'I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?' With a blend of excitement and apprehension, you ponder the riddle and contemplate the potential answers.",
+    background: "",
+    choices: [
+      { id: 1, text: "Answer: 'An echo'", nextElement: 6 },
+      { id: 2, text: "Answer: 'A ghost'", nextElement: 7 },
+    ],
   },
   {
   id: 6,
@@ -109,6 +120,66 @@ choices: [
     { id: 1, text: "Look for another adventure", nextElement: 14 },
   ],
 },
-];
+{
+  id: 16,
+  text: "You decide to seek help from the locals in solving the riddles. You come across an elderly woman, who seems to be well-versed in the city's lore. With her guidance, you manage to decipher the riddles and make your way through the city's hidden paths. As you work together, you learn about the history of Duncraw and the legends surrounding the treasure you seek.",
+  background: "",
+  choices: [
+  { id: 1, text: "Follow the elderly woman's guidance", nextElement: 4 },
+  { id: 2, text: "Venture forth on your own", nextElement: 18 },
+  ],
+  },{
+    id: 17,
+    text: "Curiosity piqued, you decide to seek out the secret society. After asking discreet questions and following mysterious leads, you find yourself in a dimly lit chamber, surrounded by hooded figures. They reveal that they have been guarding the treasure for generations and are willing to share their knowledge with you if you prove yourself worthy.",
+    background: "",
+    choices: [
+    { id: 1, text: "Accept their challenge", nextElement: 19 },
+    { id: 2, text: "Politely decline and follow the map", nextElement: 2 },
+    ],
+    },
+    {
+    id: 18,
+    text: "You choose to venture forth on your own, armed with the knowledge shared by the elderly woman. As you delve deeper into the city's labyrinth, you encounter hidden passages and secret chambers, each filled with their own mysteries and dangers. Along the way, you find clues that hint at the treasure's true nature and the ancient civilization that once thrived in Duncraw.",
+    background: "",
+    choices: [
+    { id: 1, text: "Continue exploring the city's secrets", nextElement: 20 },
+    { id: 2, text: "Return to the main path and follow the map", nextElement: 4 },
+    ],
+    },
+    {
+    id: 19,
+    text: "Accepting the secret society's challenge, you embark on a series of trials designed to test your wit, courage, and resourcefulness. As you overcome each trial, you gain the respect and admiration of the society members. They eventually share their knowledge of the treasure and the city's hidden secrets, opening new doors of adventure.",
+    background: "",
+    choices: [
+    { id: 1, text: "Embark on a new adventure with the secret society", nextElement: 21 },
+    { id: 2, text: "Continue the treasure hunt using the society's knowledge", nextElement: 4 },
+    ],
+    },
+    {
+    id: 20,
+    text: "As you continue exploring the city's secrets, you uncover the remnants of an ancient civilization and its lost technology. The more you learn, the more you realize that the treasure is only a small part of a larger, more complex story. The deeper you delve, the more you become entwined in the city's hidden history, shaping your destiny and that of Duncraw itself.",
+    background: "",
+    choices: [
+    { id: 1, text: "Embrace your newfound destiny", nextElement: 22 },
+    { id: 2, text: "Return to the treasure hunt", nextElement: 4 },
+    ],
+    },
+    {
+    id: 21,
+    text: "Embarking on a new adventure with the secret society, you become part of a larger quest to protect Duncraw and its hidden secrets. As a valued member of the society, you face countless challenges and forge lasting friendships. Your experiences in Duncraw have forever changed you, turning you into a seasoned adventurer and a guardian of the city's ancient mysteries.",
+    background: "",
+    choices: [
+    { id: 1, text: "To be continued...", nextElement: 1 },
+  ],
+  },
+  {
+  id: 22,
+  text: "Embracing your newfound destiny, you become a key figure in uncovering and preserving the ancient civilization's secrets. As you delve deeper into Duncraw's hidden history, you face countless challenges and form unlikely alliances. The once simple treasure hunt has evolved into a grand adventure, one that shapes not only your fate but the future of the city itself.",
+  background: "",
+  choices: [
+  { id: 1, text: "To be continued...", nextElement: 1 },
+  ],
+  },
+  ];
 
 export default storyElements;

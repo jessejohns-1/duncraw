@@ -46,9 +46,9 @@ code {
   border-radius: 8px;
   padding: 1rem;
   color: rgb(251, 255, 0);
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 8px;
-    text-shadow: 2px 2px 2px #ff1e00;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  text-shadow: 2px 2px 2px #ff1e00;
 }
 p {
   font-size: 18px;

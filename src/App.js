@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import storyElements from './storyElements';
 import landing from './image/start_background.png';
+import Draggable from 'react-draggable';
 
 function App() {
   const [gameText, setGameText] = useState('Welcome to the game! Press "Start" to begin.');
   const [currentElement, setCurrentElement] = useState(null);
   const [userName, setUserName] = useState('');
   const [userInput, setUserInput] = useState('');
-  const [inventory, setInventory] = useState([]);
+  const [inventory, setInventory] = useState([{ name: 'Companion', description: 'A small, furry friend.'}]);
   const [isInventoryVisible, setIsInventoryVisible] = useState(true);
+
+  
   const handleChoiceClick = (choice) => {
     const nextElement = storyElements.find((el) => el.id === choice.nextElement);
     setGameText(nextElement.text);
@@ -42,23 +45,29 @@ function App() {
   });
 
   return (
-    <div className="App">
+    <div className="App" style={getBackgroundStyle()}>
       <div className="image-container" style={getBackgroundStyle()} />
       <div className="content">
         {isInventoryVisible ? (
-          <div className="inventory-box">
-            <button onClick={() => setIsInventoryVisible(false)}>Close Inventory</button>
-            <p>Inventory & Companion:</p>
-            <ul>
-              {inventory.map((item, index) => (
-                <li key={index}>
-                  <div>
-                    <strong>{item.name}</strong>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Draggable>
+            <div className="inventory-box">
+              <button onClick={() => setIsInventoryVisible(false)}>Close Inventory</button>
+              <p>Inventory & Companion:</p>
+              <ul>
+                {inventory.length === 0 ? (
+                  <p className="empty-inventory">Your inventory is currently empty.</p>
+                ) : (
+                  inventory.map((item, index) => (
+                    <li key={index}>
+                      <div>
+                        <strong>{item.name}</strong>
+                      </div>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </div>
+          </Draggable>
         ) : (
           <button className="inventory-button" onClick={() => setIsInventoryVisible(true)}>
             Open Inventory
@@ -66,31 +75,35 @@ function App() {
         )}
         <h1>Welcome to Duncraw</h1>
         {!userName ? (
-          <div>
+          <div className="game-title">
             <input
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
               placeholder="Enter your name..."
             />
-            <button onClick={() => startGame(userInput)}>Submit</button>
+            <button onClick={() => startGame(userInput)}>Start Game</button>
           </div>
         ) : (
           <div>
-            <p>{gameText}</p>
-            {currentElement?.choices.map((choice) => (
-              <button
-                key={choice.id}
-                onClick={() => {
-                  if (choice.item) {
-                    addItemToInventory(choice.item);
-                  }
-                  handleChoiceClick(choice);
-                }}
-              >
-                {choice.text}
-              </button>
-            ))}
+            <div className="narrative">
+              <p>{gameText}</p>
+            </div>
+            <div className="choices">
+              {currentElement?.choices.map((choice) => (
+                <button
+                  key={choice.id}
+                  onClick={() => {
+                    if (choice.item) {
+                      addItemToInventory(choice.item);
+                    }
+                    handleChoiceClick(choice);
+                  }}
+                >
+                  {choice.text}
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>

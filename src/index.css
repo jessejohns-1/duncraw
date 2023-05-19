@@ -19,12 +19,18 @@ code {
   box-sizing: border-box;
   font-family: 'Fondamento', cursive;
   background-color: black;
+  background-image: url(https://media.discordapp.net/attachments/1067430982522781707/1108591739658309692/brownsugar_background_websitedungeonwallpaper_dd3776f8-99a0-4cf6-9d6f-5354032a2184.png?width=501&height=501);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
 }
 
 .image-container {
   width: 100%;
   height: 40%; /* Adjust the height to a desired percentage of the viewport */
-  min-height: 200px; /* Set a minimum height for the image */
+  min-height: 400px; /* Set a minimum height for the image */
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -76,9 +82,6 @@ button {
   margin: 10px;
 }
 
-button:hover {
-  background-color: #2a75d2;
-}
 
 .inventory-box {
   display: inline-block;
@@ -125,3 +128,4 @@ button:hover {
 .inventory-button:hover {
   background-color: #2a75d2;
 }
+

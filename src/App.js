@@ -91,17 +91,23 @@ function App() {
             </div>
             <div className="choices">
               {currentElement?.choices.map((choice) => (
-                <button
-                  key={choice.id}
-                  onClick={() => {
-                    if (choice.item) {
-                      addItemToInventory(choice.item);
-                    }
-                    handleChoiceClick(choice);
-                  }}
-                >
-                  {choice.text}
-                </button>
+               <button
+               key={choice.id}
+               onClick={() => {
+                 if (choice.item) {
+                   addItemToInventory(choice.item);
+                 }
+                 handleChoiceClick(choice);
+               }}
+               onTouchStart={() => {
+                 if (choice.item) {
+                   addItemToInventory(choice.item);
+                 }
+                 handleChoiceClick(choice);
+               }}
+             >
+               {choice.text}
+             </button>
               ))}
             </div>
           </div>

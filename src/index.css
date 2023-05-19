@@ -12,7 +12,6 @@ code {
 }
 .App {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
@@ -29,7 +28,6 @@ code {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-
   margin-bottom: 1rem;
   border-radius: 8px;
 }
@@ -110,4 +108,20 @@ button:hover {
 .inventory-box p {
   font-size: 16px;
   text-align: center;
+}
+.inventory-button {
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999; /* Set a high z-index to make sure the inventory box stays on top */
+  background-color: #115317;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.inventory-button:hover {
+  background-color: #2a75d2;
 }

@@ -8,7 +8,7 @@ function App() {
   const [userName, setUserName] = useState('');
   const [userInput, setUserInput] = useState('');
   const [inventory, setInventory] = useState([]);
-
+  const [isInventoryVisible, setIsInventoryVisible] = useState(true);
   const handleChoiceClick = (choice) => {
     const nextElement = storyElements.find((el) => el.id === choice.nextElement);
     setGameText(nextElement.text);
@@ -45,18 +45,25 @@ function App() {
     <div className="App">
       <div className="image-container" style={getBackgroundStyle()} />
       <div className="content">
-        <div className="inventory-box">
-          <p>Inventory & Companion:</p>
-          <ul>
-            {inventory.map((item, index) => (
-              <li key={index}>
-              <div>
-                <strong>{item.name}</strong>
-              </div>
-            </li>
-            ))}
-          </ul>
-        </div>
+        {isInventoryVisible ? (
+          <div className="inventory-box">
+            <button onClick={() => setIsInventoryVisible(false)}>Close Inventory</button>
+            <p>Inventory & Companion:</p>
+            <ul>
+              {inventory.map((item, index) => (
+                <li key={index}>
+                  <div>
+                    <strong>{item.name}</strong>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <button className="inventory-button" onClick={() => setIsInventoryVisible(true)}>
+            Open Inventory
+          </button>
+        )}
         <h1>Welcome to Duncraw</h1>
         {!userName ? (
           <div>

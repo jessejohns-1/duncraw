@@ -47,32 +47,47 @@ function App() {
   return (
     <div className="App" style={getBackgroundStyle()}>
       <div className="image-container" style={getBackgroundStyle()} />
-      <div className="content">
-        {isInventoryVisible ? (
-          <Draggable>
-            <div className="inventory-box">
-              <button onClick={() => setIsInventoryVisible(false)}>Close Inventory</button>
-              <p>Inventory & Companion:</p>
-              <ul>
-                {inventory.length === 0 ? (
-                  <p className="empty-inventory">Your inventory is currently empty.</p>
-                ) : (
-                  inventory.map((item, index) => (
-                    <li key={index}>
-                      <div>
-                        <strong>{item.name}</strong>
-                      </div>
-                    </li>
-                  ))
-                )}
-              </ul>
-            </div>
-          </Draggable>
-        ) : (
-          <button className="inventory-button" onClick={() => setIsInventoryVisible(true)}>
-            Open Inventory
+      {isInventoryVisible && (
+      <Draggable>
+      <div className="draggable-inventory">
+        <div className="inventory-box">
+          <button
+            className="toggle-inventory-button"
+            onClick={() => setIsInventoryVisible(!isInventoryVisible)}
+            onTouchStart={() => setIsInventoryVisible(!isInventoryVisible)}
+          >
+            <i className="fas fa-window-minimize"></i>
           </button>
-        )}
+          <div className="inventory-content">
+            <p>Inventory & Companion:</p>
+            <ul>
+              {inventory.length === 0 ? (
+                <p className="empty-inventory">Your inventory is currently empty.</p>
+              ) : (
+                inventory.map((item, index) => (
+                  <li key={index}>
+                    <div>
+                      <strong>{item.name}</strong>
+                    </div>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </Draggable>
+      )}
+      {!isInventoryVisible && (
+        <button
+          className="toggle-inventory-button"
+          onClick={() => setIsInventoryVisible(!isInventoryVisible)}
+          onTouchStart={() => setIsInventoryVisible(!isInventoryVisible)}
+        >
+          <i className="fas fa-window-maximize"> inventory</i>
+        </button>
+      )}
+      <div className="content">
         <h1>Welcome to Duncraw</h1>
         {!userName ? (
           <div className="game-title">
@@ -91,23 +106,23 @@ function App() {
             </div>
             <div className="choices">
               {currentElement?.choices.map((choice) => (
-               <button
-               key={choice.id}
-               onClick={() => {
-                 if (choice.item) {
-                   addItemToInventory(choice.item);
-                 }
-                 handleChoiceClick(choice);
-               }}
-               onTouchStart={() => {
-                 if (choice.item) {
-                   addItemToInventory(choice.item);
-                 }
-                 handleChoiceClick(choice);
-               }}
-             >
-               {choice.text}
-             </button>
+                <button
+                  key={choice.id}
+                  onClick={() => {
+                    if (choice.item) {
+                      addItemToInventory(choice.item);
+                    }
+                    handleChoiceClick(choice);
+                  }}
+                  onTouchStart={() => {
+                    if (choice.item) {
+                      addItemToInventory(choice.item);
+                    }
+                    handleChoiceClick(choice);
+                  }}
+                >
+                  {choice.text}
+                </button>
               ))}
             </div>
           </div>

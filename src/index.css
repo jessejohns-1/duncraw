@@ -104,6 +104,39 @@ header {
   color: #800080; /* Purple */
   text-align: center;
 }
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.image {
+  max-width: 400px;
+  border: 2px solid #FF00FF; /* Pink */
+  border-radius: 5px;
+}
+.character-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.character {
+  max-width: 300px;
+  border: 2px solid #FF00FF; /* Pink */
+  border-radius: 5px;
+}
+
+.main {
+  margin-right: 1rem;
+}
+
+.other {
+  margin-left: 1rem;
+}
+
 
 @media (max-width: 600px) {
   .App {
@@ -124,4 +157,5 @@ header {
     padding: 1.5rem;
   }
 }
+
 

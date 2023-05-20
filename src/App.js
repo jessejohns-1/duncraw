@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import storyElements from './Story/storyElements';
 import gif from './image/gif.webp';
 import Draggable from 'react-draggable';
-
+const imageMap = {
+  main: 'https://media.discordapp.net/attachments/1059614173031567402/1109330335717666846/0_1.png?width=521&height=521',
+  // Add more image mappings here
+};
 function App() {
   const [gameText, setGameText] = useState('Welcome to the game! Press "Start" to begin.');
   const [currentElement, setCurrentElement] = useState(null);
   const [userName, setUserName] = useState('');
   const [userInput, setUserInput] = useState('');
-  const [inventory, setInventory] = useState([{ name: 'Companion', description: 'A small, furry friend.'}]);
-  const [isInventoryVisible, setIsInventoryVisible] = useState(true);
+  const [inventory, setInventory] = useState([{ name: 'this is the item', description: 'A small, furry friend.'},]);
+  const [isInventoryVisible, setIsInventoryVisible] = useState(false);
 
   
   const handleChoiceClick = (choice) => {
@@ -25,10 +28,7 @@ function App() {
     setUserName(name);
     const firstElement = storyElements[0];
     if (firstElement.inventoryAction) {
-      setInventory((prevInventory) => {
-        const newInventory = [...prevInventory, firstElement.inventoryAction.item];
-        return newInventory;
-      });
+      setInventory((prevInventory) => [...prevInventory, firstElement.inventoryAction.item]);
     }
     setGameText(`Welcome, ${name}! ${firstElement.text}`);
     setCurrentElement(firstElement);
@@ -46,7 +46,22 @@ function App() {
 
   return (
     <div className="App" style={getBackgroundStyle()}>
-      <div className="image-container" style={getBackgroundStyle()} />
+    <div className="character-container">
+        {currentElement?.character === 'main' && (
+          <img
+            src={imageMap.main}
+            alt="Main Character"
+            className="character main"
+          />
+        )}
+        {currentElement?.character === 'other' && (
+          <img
+            src={imageMap.other}
+            alt="Other Character"
+            className="character other"
+          />
+        )}
+      </div>
       {isInventoryVisible && (
       <Draggable>
       <div className="draggable-inventory">
@@ -68,6 +83,7 @@ function App() {
                   <li key={index}>
                     <div>
                       <strong>{item.name}</strong>
+                      <h5>{item.description}</h5>
                     </div>
                   </li>
                 ))

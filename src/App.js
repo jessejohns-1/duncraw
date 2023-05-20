@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import storyElements from './storyElements';
-import landing from './image/start_background.png';
+import storyElements from './Story/storyElements';
+import gif from './image/gif.webp';
 import Draggable from 'react-draggable';
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
   };
 
   const getBackgroundStyle = () => ({
-    backgroundImage: `url(${currentElement?.background || landing})`,
+    backgroundImage: `url(${currentElement?.background || gif})`,
   });
 
   return (

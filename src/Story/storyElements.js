@@ -67,26 +67,136 @@ const storyElements = [
 ////////////////////////// search apartment ///////////////////////////////
 {
   id: 'exploration',
-  text: "You hang up the phone, the cryptic conversation with Professor Kholvaz still ringing in your ears. The apartment around you now seems like a labyrinth of mysteries waiting to be uncovered. A strange yet strong urge compels you to explore your surroundings, searching for answers to the questions swirling in your mind.\n\nAs you stride across the room, each step resonates with a soft creak on the weathered wooden floor, the sound echoing within the four walls like an ancient chant. The furnishings are simple yet carry an air of antiquity, each item a silent testament to countless stories they might have witnessed.\n\nYour hand brushes against the sturdy table, its wooden surface wearing the traces of time. You wonder who sat here before you, what they pondered, what they achieved. An unassuming chair in the corner of the room, seemingly undisturbed for a while, whispers tales of solitary moments and introspective journeys.\n\nA foggy view outside the window captures your attention. The world outside seems distant, as if blurred by the veil of forgetfulness. Turning back to the room, your eyes land on a small, dusty painting. It depicts an exotic landscape, possibly the Ionisia Kingdom that Professor Kholvaz mentioned. The colors and imagery spark a sense of déjà vu, as if you've seen it before.\n\nAs you explore, your connection with this place deepens. Yet, the more you see, the more questions arise. Who are you really? And why are you here? Amidst the growing web of mysteries, the phone begins to ring again.",
+  text: "You hang up the phone, the cryptic conversation with Professor Kholvaz still ringing in your ears. The apartment around you now seems like a labyrinth of mysteries waiting to be uncovered. A strange yet strong urge compels you to explore your surroundings, searching for answers to the questions swirling in your mind.\n\nAs you stride across the room, each step resonates with a soft creak on the weathered wooden floor, the sound echoing within the four walls like an ancient chant. The furnishings are simple yet carry an air of antiquity, each item a silent testament to countless stories they might have witnessed.\n\nYour hand brushes against the sturdy table, its wooden surface wearing the traces of time. You wonder who sat here before you, what they pondered, what they achieved. An unassuming chair in the corner of the room, seemingly undisturbed for a while, whispers tales of solitary moments and introspective journeys.\n\nA foggy view outside the window captures your attention. The world outside seems distant, as if blurred by the veil of forgetfulness. Turning back to the room, your eyes land on a small, dusty painting. It depicts an exotic landscape, possibly the Ionisia Kingdom that Professor Kholvaz mentioned. The colors and imagery spark a sense of déjà vu, as if you've seen it before.\n\nAs you explore, your connection with this place deepens. Yet, the more you see, the more questions arise. Who are you really? And why are you here? Amidst the growing web of mysteries, the phone begins to ring again. If you get stuck check the settings page and enable hints",
+  validCommands: ['phone', 'table', 'chair', 'window', 'painting'],
   background: room,
   character: 'main',
   image: 'main',
   choices: [
     { id: 'answer', text: "Answer the phone", nextElement: 'second_call' },
+    { id: 'freeform', text: "Enter a command or search term...", nextElement: 'freeform_response' }
+  ],
+},
+//////////////////////////searchables in apartment
+{
+  id: 'phone',
+  background: room,
+  text: "You take a closer look at the phone. It's an old rotary dial phone, the kind you might find in a vintage store. There doesn't seem to be anything unusual about it.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: "Go back", nextElement: 'exploration' },
+  ],
+},{
+  id: 'table',
+  background: room,
+  text: "You approach the table, its surface adorned with a thin layer of dust. Various objects rest upon it, seemingly frozen in time. There is a collection of antique books, an ornate candlestick, and a small wooden box. As you run your fingers along the table's edges, you notice a hidden compartment beneath the books. With a gentle pull, the compartment slides open, revealing a mysterious key.",
+  inventoryAction: {
+    type: "add",
+    item: {
+      name: "mysterious key",
+      type: "item",
+    },
+  },
+  choices: [
+    { id: 'search', text: "Search for where to use the key", nextElement: 'search' },
   ],
 },
 {
-  id: 'second_call',
-  text: "The phone's persistent ring breaks your chain of thoughts. With a sense of trepidation, you pick up the receiver once more. This time, the voice on the other end is noticeably softer, yet firm. 'You have begun the exploration, haven't you?' Professor Kholvaz inquires. His words aren't accusatory, rather, they carry a note of encouragement.\n\n'You're on the right path, userName,' he continues, a hint of a smile detectable in his tone. 'I cannot give you all the answers, but I can assure you this: every piece in this apartment holds a story, a clue. Look closer, look deeper.'\n\nBefore you can respond, the line goes dead once more, leaving you with a fresh set of cryptic advice. His words echo in your mind as you look around the room. The apartment isn't just an apartment anymore, it's a puzzle waiting to be solved.",
+  id: 'search',
   background: room,
-  character: 'main',
-  image: 'main',
+  text: "You carefully examine the key in your hand, intrigued by its mysterious nature. It feels significant, as if it holds the key to unlocking a hidden secret. With determination in your eyes, you embark on a quest to find the right place to use the key.\n\nYou begin your search, exploring every nook and cranny of the room. You inspect the walls, tapping on them in hopes of discovering a hollow sound that might indicate a hidden compartment. You try the key on various locked cabinets and drawers, feeling a mix of anticipation and curiosity with each attempt.\n\nAs time passes, you become increasingly aware of the weight of the key in your hand. It serves as a constant reminder of the mysteries that await you, urging you to continue your search. Your determination grows stronger with each unsuccessful attempt, driving you to explore every inch of the room and beyond.\n\nThe search for the perfect lock to fit the key is both thrilling and challenging. Will you uncover the secret it holds? Only time will tell.",
+  validCommands: ['wall', 'cabinet', 'drawer','door'],
   choices: [
-    { id: 'explore_more', text: "Explore the apartment deeper", nextElement: 'deeper_exploration' },
-    { id: 'ponder', text: "Ponder over the call", nextElement: 'pondering' },
+    { id: 'freeform', text: "Enter a command or search term...",nextElement: 'freeform_response' },
+  ],
+},
+{
+  id: 'chair',
+  background: room,
+  text: "You approach the chair in the corner of the room. It is a simple wooden chair, worn from years of use. As you inspect it, you notice faint indentations on the seat, suggesting that someone spent a significant amount of time sitting here. The chair seems to hold stories of contemplation and solitude, but there is nothing else of note about it.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: "Go back", nextElement: 'exploration' },
+  ],
+},{
+  id: 'window',
+  background: room,
+  image: 'window',
+  text: "You gaze out of the window, peering through the foggy glass pane. The muted patter of rain against the windowpane serves as a comforting rhythm, grounding you in this new reality. The outside world appears hazy and distant, as if separated by an ethereal barrier. Sunlight filters through the fog and raindrops, casting a soft glow in the room. You find yourself captivated by the interplay of light, shadow, and rain, as if it holds a secret message just out of reach.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: "Go back", nextElement: 'exploration' },
+  ],
+},{
+  id: 'painting',
+  background: 'painting.jpg',
+  text: "As you step closer to the painting, you're immediately captivated by its mesmerizing beauty. The canvas is filled with an intricate tapestry of colors, expertly blended together to evoke a sense of awe and wonder. The brushstrokes are masterful, each stroke revealing the artist's skill and passion. You find yourself getting lost in the details, as if the painting holds a secret world within its frame. It's a true work of art that effortlessly transports you to another realm, where emotions and imagination intertwine. You can't help but admire the artist's talent and dedication in bringing such a masterpiece to life.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: 'Go back', nextElement: 'exploration' },
+  ],
+},
+//////////////////keyhole
+{
+  id: 'wall',
+  background: room,
+  text: "You approach the wall, running your hand along its surface. It feels solid and unyielding, like a barrier protecting hidden secrets. As you inspect it more closely, you notice a subtle irregularity in the texture. There is a hairline crack that extends from floor to ceiling, almost invisible to the naked eye. Your curiosity piqued, you wonder if this crack holds any significance or leads to something hidden beyond the wall.\n\nYou contemplate the meaning behind this mysterious crack and its potential connection to the key in your possession. Could it be a concealed entrance or a symbol of a deeper mystery? The answer lies within the secrets that await your discovery.\n\nYou step back, taking in the entirety of the wall, determined to unravel its enigma. With the key in hand, you can't help but wonder if it is the key that will unlock the truth hidden behind this seemingly ordinary surface.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: "Go back", nextElement: 'search' },
   ],
 },
 
+{
+  id: 'cabinet',
+  background: room,
+  text: "You approach the cabinet, its polished surface reflecting a glimmer of light. The cabinet is sturdy, with ornate carvings and brass handles. As you open the doors, a faint scent of aged wood wafts through the air. Inside, you find an assortment of objects neatly arranged on shelves. There are old photographs, delicate porcelain figurines, and a stack of dusty journals.\n\nYou carefully inspect each item, searching for any hidden compartments or clues. Your fingertips trace the engravings on the figurines, your eyes scanning the faded photographs for familiar faces. The journals beckon you to uncover their secrets, but they remain locked with an air of mystery.\n\nAs you explore the contents of the cabinet, you can't help but wonder if the key you possess might hold the answer to unlocking the hidden treasures within. Could it be that the cabinet conceals more than meets the eye? Only further investigation will reveal the truth.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: "Go back", nextElement: 'exploration' },
+  ],
+},
+
+{
+  id: 'drawer',
+  background: room,
+  text: "You approach the drawer, its wooden surface smooth to the touch. It is a modest drawer, unadorned and blending seamlessly with the surrounding furniture. As you pull it open, a faint scent of cedar fills the air, reminiscent of memories long past. Inside, you find an array of items meticulously organized. There are bundles of handwritten letters, delicate trinkets, and a small brass key nestled among them.\n\nYou carefully examine each item, immersing yourself in the stories they hold. The letters, inked with emotions, reveal snippets of heartfelt conversations. The trinkets, worn with time, whisper tales of cherished moments. Your gaze fixates on the brass key, a tangible link to a hidden world waiting to be unlocked.\n\nAs you delve deeper into the contents of the drawer, you can't help but wonder what secrets it holds. Could the key you possess be the missing piece to unraveling the enigma within? The answers lie within these tangible fragments of the past, beckoning you to uncover their hidden truths.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: "Go back", nextElement: 'exploration' },
+  ],
+},
+{
+  id: 'floor',
+  background: room,
+  text: "You shift your attention downward and focus on the floor beneath your feet. It's worn and weathered, bearing the marks of countless footsteps that have traversed its surface. The floorboards creak with each step, their protestations a testament to the passage of time.\n\nAs you examine the floor, you notice subtle patterns in the wood grain—a mosaic of memories etched into the very foundation of this place. Some boards are loose, creating an uneven path that requires careful navigation. The irregularities in the floor mirror the uncertainties and challenges that lie ahead.\n\nThe faint echoes of distant conversations and muffled footsteps seep through the floor, whispering tales of the building's past. The floor seems to hold the secrets of those who once walked these halls, inviting you to uncover the hidden stories woven into its fibers.\n\nYou take a moment to absorb the energy emanating from the floor, acknowledging the weight of the past that lingers here. With each step, you move forward, following the path laid out before you, ready to unravel the mysteries that await.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: "Go back", nextElement: 'search' },
+  ],
+},
+{
+  id: 'door',
+  background: room,
+  text: "You approach the door, your only gateway to the outside world. As you try the doorknob, you realize it is locked from the inside. A feeling of confinement washes over you, fueling your desire to escape. You search your pockets and find a small key—the one you discovered earlier. With a surge of hope, you insert the key into the lock and turn it.\n\nClick! The lock disengages, and the door creaks open, revealing a sliver of freedom beyond. A rush of fresh air greets your senses, a tantalizing reminder of the vast possibilities that lie beyond these walls.\n\nWith each step towards the open door, you leave behind the confines of the room. As the door closes behind you, a mixture of trepidation and excitement fills your heart. The world outside beckons, ready to unfold its wonders and challenges. The journey awaits, and you are prepared to embrace it.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'continue', text: "continue", nextElement: 'hallway' },
+  ],
+},
+///////////keyhole
+
+
+//////////////////////////searchables in apartment
+{
+  id: 'hallway',
+  background: "",
+  text: "You step out of the room and find yourself in a dimly lit hallway, the faded wallpaper peeling off the walls. The air is heavy with a musty scent, a reminder of neglect and time's relentless march. The hallway stretches out before you, its length disappearing into darkness. A flickering lightbulb intermittently illuminates the corridor, casting eerie shadows that dance on the walls.\n\nAs you take your first steps, a sense of unease settles in. Each creaking floorboard beneath your feet echoes through the silence, amplifying the emptiness of the building. The doors along the hallway stand closed and weathered, hiding their secrets within. You can't help but wonder what stories lie behind those doors—tales of joy, sorrow, and forgotten dreams.\n\nThe sound of distant footsteps echoes through the hall, making you pause. Is someone else here, or is it merely an echo of memories long past? The uncertainty gnaws at you, heightening your awareness of the unfamiliar surroundings.\n\nYou steel yourself and continue down the hallway, guided by a mix of curiosity and trepidation. The unknown awaits, and with each step, you move further into the heart of the building, yearning to uncover the mysteries that shroud this forgotten place.",
+  validCommands: ['back'],
+  choices: [
+    { id: 'back', text: "to be continued", nextElement: 'exploration' },
+  ],
+},
 ];
 
 export default storyElements;

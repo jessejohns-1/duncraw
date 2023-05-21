@@ -9,6 +9,7 @@ import track3 from './music/track3.mp3';
 import track4  from './music/track4.mp3';
 import dreads from './Components/characters/dreads.png';
 import phone from './image/phone.png';
+import window from './image/city.gif';
 //songs//
 const songs = [
   track1,
@@ -21,6 +22,7 @@ const imageMap = {
   main: 'https://media.discordapp.net/attachments/1059614173031567402/1109330335717666846/0_1.png?width=521&height=521',
   dreads: dreads,
   phone: phone,
+  window:window,
   // Add more image mappings here
 };
 function App() {
@@ -40,8 +42,9 @@ function App() {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isImageVisible, setIsImageVisible] = useState(true);
   const [typingSpeed, setTypingSpeed] = useState('off');
+  const [userCommand, setUserCommand] = useState('');
   const bgm = useRef();
-
+  const [showHints, setShowHints] = useState(false);
 
   const toggleSettingsVisibility = () => {
     setIsSettingsVisible(!isSettingsVisible);
@@ -123,16 +126,54 @@ const playOrPauseSong = () => {
     isBGMPlaying ? bgm.current.play() : bgm.current.pause();
   }, [isBGMPlaying]);
   //music
+
+
   const handleChoiceClick = (choice) => {
-    const nextElement = storyElements.find((el) => el.id === choice.nextElement);
-    if (nextElement) {
-      setGameText(nextElement.text);
-      setCurrentElement(nextElement);
-      if (nextElement.inventoryAction) {
-        setInventory((prevInventory) => [...prevInventory, nextElement.inventoryAction.item]);
+    if (choice.id === 'freeform') {
+      handleUserCommand(userCommand);
+    } else {
+      const nextElement = storyElements.find((el) => el.id === choice.nextElement);
+      if (nextElement) {
+        if (nextElement.inventoryAction) {
+          addItemToInventory(nextElement.inventoryAction.item);
+        }
+        setGameText(nextElement.text);
+        setCurrentElement(nextElement);
+      } else {
+        console.error(`Next element with ID '${choice.nextElement}' not found.`);
+      }
+    }
+  };
+  const addItemToInventory = (item) => {
+    // Check if the item already exists in the inventory
+    const isItemInInventory = inventory.some((existingItem) => existingItem.name === item.name);
+    if (!isItemInInventory) {
+      setInventory((prevInventory) => [...prevInventory, item]);
+    }
+  };
+
+
+
+  const handleUserCommand = (userCommand) => {
+    if (currentElement.validCommands.includes(userCommand.toLowerCase())) {
+      // if the command is valid, find the corresponding element in the story
+      const nextElement = storyElements.find((el) => el.id === userCommand);
+      if (nextElement) {
+        setGameText(nextElement.text);
+        setCurrentElement(nextElement);
+        if (nextElement.inventoryAction) {
+          const itemToAdd = nextElement.inventoryAction.item;
+          const isItemInInventory = inventory.some((existingItem) => existingItem.name === itemToAdd.name);
+          if (!isItemInInventory) {
+            setInventory((prevInventory) => [...prevInventory, itemToAdd]);
+          }
+        }
+      } else {
+        console.error(`Next element with ID '${userCommand}' not found.`);
       }
     } else {
-      console.error(`Next element with ID '${choice.nextElement}' not found.`);
+      // if the command is not valid, provide a default response
+      setGameText("You don't know how to do that.");
     }
   };
 //music player above//
@@ -153,11 +194,6 @@ const startGame = (name) => {
   setCurrentElement(firstElement);
 };
 
-  const addItemToInventory = (item) => {
-    if (!inventory.some((existingItem) => existingItem.name === item.name)) {
-      setInventory((prevInventory) => [...prevInventory, item]);
-    }
-  };
 
   const getBackgroundStyle = () => ({
     backgroundImage: `url(${currentElement?.background || gif})`,
@@ -246,25 +282,26 @@ const startGame = (name) => {
   <p>{typedText.replace('userName', userName)}</p>
 </div>
             <div className="choices">
-              {currentElement?.choices.map((choice) => (
-                <button
-                  key={choice.id}
-                  onClick={() => {
-                    if (choice.item) {
-                      addItemToInventory(choice.item);
-                    }
-                    handleChoiceClick(choice);
-                  }}
-                  onTouchStart={() => {
-                    if (choice.item) {
-                      addItemToInventory(choice.item);
-                    }
-                    handleChoiceClick(choice);
-                  }}
-                >
-                  {choice.text}
-                </button>
-              ))}
+            {currentElement?.choices.map((choice) =>
+  choice.id === 'freeform' ? (
+    <div key={choice.id}>
+      <input type="text" value={userCommand} onChange={(e) => setUserCommand(e.target.value)} />
+      <button onClick={() => handleChoiceClick(choice)}>Submit</button>
+    </div>
+  ) : (
+    <button
+      key={choice.id}
+      onClick={() => {
+        if (choice.item) {
+          addItemToInventory(choice.item);
+        }
+        handleChoiceClick(choice);
+      }}
+    >
+      {choice.text}
+    </button>
+  )
+)}
             </div>
             
           </div>
@@ -326,7 +363,29 @@ const startGame = (name) => {
         <button onClick={nextSong}>Next</button>
         <input type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
       </div>
-          {/* Add more settings here as needed */}
+      <div className="hints-controls">
+            <h3>Show Hints:</h3>
+            <label>
+              <input
+                type="checkbox"
+                checked={showHints}
+                onChange={() => setShowHints(!showHints)}
+              />
+              Show hints
+            </label>
+          </div>
+
+          {/* Valid Commands Display */}
+          {showHints && currentElement && currentElement.validCommands && (
+            <div className="valid-commands">
+              <h3>Valid Commands:</h3>
+              <ul>
+                {currentElement.validCommands.map((command, index) => (
+                  <li key={index}>{command}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
      <button className="button-settings" onClick={toggleSettingsVisibility}>

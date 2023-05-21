@@ -133,7 +133,9 @@ button:hover {
   z-index: 999;
   background: linear-gradient(to right, rgba(128, 0, 128, 0.5), rgba(255, 0, 255, 0.5)); /* Transparent Purple to Transparent Pink */
 }
-  
+  strong {
+  color: #ffffff; /* Purple */
+  }
   .narrative-text {
     display: flex;
     justify-content: center; /* align horizontally */

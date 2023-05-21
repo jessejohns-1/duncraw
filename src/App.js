@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import storyElements from './Story/storyElements';
 import gif from './image/gif.webp';
 import Draggable from 'react-draggable';
 import {typeText} from './Components/utils';
+import track1 from './music/track1.mp3';
 const imageMap = {
   main: 'https://media.discordapp.net/attachments/1059614173031567402/1109330335717666846/0_1.png?width=521&height=521',
   // Add more image mappings here
@@ -17,12 +18,40 @@ function App() {
   const [typedText, setTypedText] = useState('');
   const [isTypingEffectEnabled, setIsTypingEffectEnabled] = useState(true);
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
+  const [isBGMPlaying, setIsBGMPlaying] = useState(true);
+  const [volume, setVolume] = useState(1);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const bgm = useRef(new Audio(track1));
+  bgm.current.loop = true;
 
   const toggleSettingsVisibility = () => {
     setIsSettingsVisible(!isSettingsVisible);
   };
 
+  //music
+  useEffect(() => {
+    play();
+  }, []);
+  const play = () => {
+    bgm.current.play();
+    setIsPlaying(true);
+  };
   
+  const pause = () => {
+    bgm.current.pause();
+    setIsPlaying(false);
+  };
+  
+  const changeVolume = (e) => {
+    let volume = e.target.value;
+    bgm.current.volume = volume;
+    setVolume(volume);
+  };
+  
+  useEffect(() => {
+    isBGMPlaying ? bgm.current.play() : bgm.current.pause();
+  }, [isBGMPlaying]);
+  //music
   const handleChoiceClick = (choice) => {
     const nextElement = storyElements.find((el) => el.id === choice.nextElement);
     setGameText(nextElement.text);
@@ -151,7 +180,7 @@ function App() {
             
           </div>
         )}
-      </div> {isSettingsVisible && (
+      </div>  {isSettingsVisible && (
         <div className="settings-box">
           <h2>Settings</h2>
           <label>
@@ -161,6 +190,12 @@ function App() {
               checked={isTypingEffectEnabled} 
               onChange={() => setIsTypingEffectEnabled(!isTypingEffectEnabled)} 
             />
+          </label>
+          <label>
+          <div className="music-controls">
+      <button onClick={isPlaying ? pause : play}>{isPlaying ? 'Pause' : 'Play'} BGM</button>
+      <input type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
+    </div>
           </label>
           {/* Add more settings here as needed */}
         </div>

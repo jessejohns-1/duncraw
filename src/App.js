@@ -45,7 +45,7 @@ function App() {
     setIsSettingsVisible(!isSettingsVisible);
   };
 
-  //music
+  //music player//
 
   useEffect(() => {
     bgm.current = new Audio(songs[currentSongIndex]);
@@ -241,7 +241,7 @@ const startGame = (name) => {
         ) : (
           <div>
           <div className="narrative-text">
-  <p>{typedText.replace('${userName}', userName)}</p>
+  <p>{typedText.replace('userName', userName)}</p>
 </div>
             <div className="choices">
               {currentElement?.choices.map((choice) => (

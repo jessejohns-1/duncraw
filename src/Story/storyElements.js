@@ -3,7 +3,7 @@ import room from '../image/mainroom1.gif';
 const storyElements = [
   {
     id: 'beginning',
-    text: 'Welcome ${userName}! to my project! This is a constantly updating story that I am working on. I hope you enjoy it! I love feedback, so please let me know what you think! jessejohns45@gmail.com',
+    text: 'Welcome userName to my project! This is a constantly updating story that I am working on. I hope you enjoy it! I love feedback, so please let me know what you think! jessejohns45@gmail.com',
     choices: [
       { id: 'continue', text: 'Continue', nextElement: 'sowebegin' },
     ],
@@ -18,19 +18,19 @@ const storyElements = [
       { id: 'continue', text: "Continue", nextElement: 'unexpected_encounter' },
     ],
   },
-  {
-    id: 'unexpected_encounter',
-    text: "As you settle into the comfort of your new dwelling, a peculiar sensation tingles in the air. The atmosphere grows hushed, and your attention is captivated by a faint whisper that glides through the room. Your curiosity piqued, you turn towards the source of the sound, only to be met with an enigmatic sight—a mesmerizing shadow that gradually takes form, unveiling a distinguished figure in its midst.",
-    background: room,
-    character: 'dreads',
-    image: 'dreads',
-    choices: [
-      { id: 'continue', text: "Continue", nextElement: 'proposal' },
-    ],
-  },
+ {
+  id: 'unexpected_encounter',
+  text: "As you settle into the comfort of your new dwelling, a peculiar sensation tingles in the air. The atmosphere grows hushed, and your attention is captivated by a faint whisper that glides through the room. Your curiosity piqued, you turn towards the source of the sound, only to be met with an enigmatic sight—a mesmerizing shadow that gradually takes form, unveiling a distinguished figure in its midst.",
+  background: room,
+  character: 'main',
+  image: 'main',
+  choices: [
+    { id: 'continue', text: "continue", nextElement: 'proposal' },
+  ],
+},
   {
     id: 'proposal',
-    text: "The shadowy silhouette solidifies into a gentleman of utmost elegance and intrigue. With a flourish, he introduces himself as Professor Kholvaz, a renowned scholar hailing from the mysterious Ionisia Kingdom. His voice resonates with wisdom and carries an air of enigma, instantly captivating your imagination.",
+    text: "The shadowy silhouette solidifies into a gentleman of utmost elegance and intrigue. With a flourish, he introduces himself as Professor Kholvaz, a renowned scholar hailing from the mysterious Ionisia Kingdom. His voice resonates with wisdom and carries an air of enigma, instantly captivating your imagination. hello userName i have been expecting you here for quite some time",
     background: room,
     character: 'dreads',
     image: 'dreads',

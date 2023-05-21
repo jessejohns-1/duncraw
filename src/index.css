@@ -159,7 +159,16 @@ button:hover {
   width: 100px;
   margin-left: 0.5rem;
   }
+  .choices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
   
+  .choices button {
+    margin-top: 0.5rem;
+  }
   @media (max-width: 600px) {
   .App {
   font-size: 0.8rem;
@@ -220,6 +229,7 @@ button:hover {
   .choices {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: 1rem;
   }
   

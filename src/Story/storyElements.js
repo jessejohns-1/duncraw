@@ -32,8 +32,8 @@ const storyElements = [
     id: 'proposal',
     text: "The shadowy silhouette solidifies into a gentleman of utmost elegance and intrigue. With a flourish, he introduces himself as Professor Kholvaz, a renowned scholar hailing from the mysterious Ionisia Kingdom. His voice resonates with wisdom and carries an air of enigma, instantly captivating your imagination.",
     background: room,
-    character: 'professor',
-    image: 'squirrel',
+    character: 'dreads',
+    image: 'dreads',
     choices: [
       { id: 'accept', text: "end for now", nextElement: 'beginning' },
 

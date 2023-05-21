@@ -7,6 +7,7 @@ body {
   background-size: cover;
   background-position: center;
 }
+
 .App {
   position: fixed;
   top: 0;
@@ -23,12 +24,12 @@ body {
   background-position: center;
 }
 
-
-
-
-
-
-
+.draggable-inventory {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
 
 .content {
   max-width: 80%;
@@ -73,15 +74,17 @@ button:hover {
 }
 
 .inventory-box {
-  top: 0;
-  left: 0;
+  position: fixed;
+  top: 10px;
+  right: 10px;
   display: flex;
+  width: 250px;
   flex-direction: column;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.63);
-  margin: 0.5rem;
-  z-index: 1000;
+  padding: 1rem;
   border: 2px solid #ff00ff; /* Pink */
+  z-index: 1000;
 }
 
 .toggle-inventory-button {
@@ -106,6 +109,7 @@ button:hover {
   align-items: center;
   padding: 1rem;
   }
+  
   
   .image {
   max-width: 400px;

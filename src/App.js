@@ -7,6 +7,7 @@ import track1 from './music/track1.mp3';
 import track2 from  './music/track2.mp3';
 import track3 from './music/track3.mp3';
 import track4  from './music/track4.mp3';
+import dreads from './Components/characters/dreads.png';
 //songs//
 const songs = [
   track1,
@@ -17,6 +18,7 @@ const songs = [
 //songs//
 const imageMap = {
   main: 'https://media.discordapp.net/attachments/1059614173031567402/1109330335717666846/0_1.png?width=521&height=521',
+  dreads: dreads,
   // Add more image mappings here
 };
 function App() {
@@ -24,7 +26,8 @@ function App() {
   const [currentElement, setCurrentElement] = useState(null);
   const [userName, setUserName] = useState('');
   const [userInput, setUserInput] = useState('');
-  const [inventory, setInventory] = useState([{ name: 'this is the item', description: 'A small, furry friend.'},]);
+  //{ name: 'this is the item', description: 'A small, furry friend.'},// for inventory
+  const [inventory, setInventory] = useState([]);
   const [isInventoryVisible, setIsInventoryVisible] = useState(false);
   const [typedText, setTypedText] = useState('');
   const [isTypingEffectEnabled, setIsTypingEffectEnabled] = useState(true);
@@ -120,13 +123,21 @@ const playOrPauseSong = () => {
   //music
   const handleChoiceClick = (choice) => {
     const nextElement = storyElements.find((el) => el.id === choice.nextElement);
-    setGameText(nextElement.text);
-    setCurrentElement(nextElement);
-    if (nextElement.inventoryAction) {
-      setInventory((prevInventory) => [...prevInventory, nextElement.inventoryAction.item]);
+    if (nextElement) {
+      setGameText(nextElement.text);
+      setCurrentElement(nextElement);
+      if (nextElement.inventoryAction) {
+        setInventory((prevInventory) => [...prevInventory, nextElement.inventoryAction.item]);
+      }
+    } else {
+      console.error(`Next element with ID '${choice.nextElement}' not found.`);
     }
   };
 //music player above//
+useEffect(() => {
+  const typingStopper = typeText(currentElement?.text || '', setTypedText, isTypingEffectEnabled, typingSpeed);
+  return typingStopper;
+}, [currentElement, isTypingEffectEnabled, typingSpeed]);
 
 const startGame = (name) => {
   setUserName(name);
@@ -151,6 +162,11 @@ const startGame = (name) => {
   });
   const changeTypingSpeed = (speed) => {
     setTypingSpeed(speed);
+    if (speed === 'off') {
+      setIsTypingEffectEnabled(false);
+    } else {
+      setIsTypingEffectEnabled(true);
+    }
   };
 
   useEffect(() => {

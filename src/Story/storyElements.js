@@ -1,11 +1,9 @@
-import vibrance from '../image/vibrance.gif';
+import city from '../image/city.gif';
+import room from '../image/mainroom1.gif';
 const storyElements = [
 {
-  id: 'beginning',
-  text: "Hey there! So, you find yourself here, huh? Don't bother asking or wondering where we are. Trust me, it's a place you wouldn't believe even if I described it to you. Picture a mashup of interdimensional chaos, existential absurdity, and a touch of cosmic weirdness. Yeah, it's that messed up.",
-  character: 'main',
-  image: 'main',
-  background: '',
+   id: 'beginning',
+    text: 'Welcome ${userName}! to my project! this is a constantly updating story that I am working on. I hope you enjoy it! i love feedback so please let me know what you think! jessejohns45@gmail.com',
   choices: [
     { id: 'continue', text: 'Continue', nextElement: 'academic_struggles' },
   ],
@@ -13,7 +11,7 @@ const storyElements = [
   {
     id: 'academic_struggles',
     text: "The pull of destiny eases, and you step forward, crossing the threshold into your new existence. The door creaks shut behind you, closing out the celestial echoes of your birth. As your eyes adjust to the dim light, you're greeted with the sight of an old but homely apartment.\n\nThe floor beneath you is worn but welcoming, the wooden planks groaning slightly under your weight, telling tales of those who have tread here before you. Your eyes wander to the simple, rustic furnishings - a sturdy table here, a comforting armchair there. A singular window punctuates the far wall, allowing a cascade of muted sunlight to spill into the room, illuminating the dust particles dancing in the air.\n\nIt's not grand or regal, but it radiates warmth, an echo of many quiet and comforting days. And though the cosmos beckon from outside the window, it's here in this humble dwelling that your journey truly begins.",
-    background: vibrance,
+    background: room,
     character: 'main',
     image: 'main',
     choices: [

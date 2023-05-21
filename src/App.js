@@ -4,6 +4,17 @@ import gif from './image/gif.webp';
 import Draggable from 'react-draggable';
 import {typeText} from './Components/utils';
 import track1 from './music/track1.mp3';
+import track2 from  './music/track2.mp3';
+import track3 from './music/track3.mp3';
+import track4  from './music/track4.mp3';
+//songs//
+const songs = [
+  track1,
+  track2,
+  track3,
+  track4
+]
+//songs//
 const imageMap = {
   main: 'https://media.discordapp.net/attachments/1059614173031567402/1109330335717666846/0_1.png?width=521&height=521',
   // Add more image mappings here
@@ -19,16 +30,43 @@ function App() {
   const [isTypingEffectEnabled, setIsTypingEffectEnabled] = useState(true);
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
   const [isBGMPlaying, setIsBGMPlaying] = useState(true);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(0.1);
   const [isPlaying, setIsPlaying] = useState(false);
-  const bgm = useRef(new Audio(track1));
-  bgm.current.loop = true;
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [isImageVisible, setIsImageVisible] = useState(true);
+  const [typingSpeed, setTypingSpeed] = useState('off');
+  const bgm = useRef();
+
 
   const toggleSettingsVisibility = () => {
     setIsSettingsVisible(!isSettingsVisible);
   };
 
   //music
+
+  useEffect(() => {
+    bgm.current = new Audio(songs[currentSongIndex]);
+    bgm.current.loop = false; // Stop looping so we can play the next song
+    bgm.current.play();
+    bgm.current.volume = 0.1;
+    // When the song ends, increment the song index and start the next song
+    bgm.current.onended = () => {
+      setCurrentSongIndex((prevIndex) => {
+        const nextIndex = (prevIndex + 1) % songs.length;
+        bgm.current = new Audio(songs[nextIndex]);
+        bgm.current.play();
+        return nextIndex;
+      });
+    };
+  
+    return () => {
+      // Clean up the audio when the component unmounts
+      bgm.current.pause();
+      bgm.current = null;
+    };
+  }, [currentSongIndex]);
+  
+
   useEffect(() => {
     play();
   }, []);
@@ -36,11 +74,39 @@ function App() {
     bgm.current.play();
     setIsPlaying(true);
   };
-  
-  const pause = () => {
-    bgm.current.pause();
-    setIsPlaying(false);
+  const previousSong = () => {
+    setIsPlaying(false); // Pause the current song
+    setCurrentSongIndex((prevIndex) => {
+      const prevSongIndex = (prevIndex - 1 + songs.length) % songs.length; // Calculate the index of the previous song
+      bgm.current.pause(); // Pause the current song
+      bgm.current = new Audio(songs[prevSongIndex]); // Load the previous song
+      bgm.current.play(); // Play the previous song
+      setIsPlaying(true); // Set the state to playing
+      return prevSongIndex; // Update the current song index
+    });
   };
+ const nextSong = () => {
+  setIsPlaying(false); // Pause the current song
+  setCurrentSongIndex((prevIndex) => {
+    const nextSongIndex = (prevIndex + 1) % songs.length; // Calculate the index of the next song
+    bgm.current.pause(); // Pause the current song
+    bgm.current = new Audio(songs[nextSongIndex]); // Load the next song
+    bgm.current.play(); // Play the next song
+    setIsPlaying(true); // Set the state to playing
+    return nextSongIndex; // Update the current song index
+  });
+};
+const pause = () => {
+  bgm.current.pause();
+  setIsPlaying(false);
+};
+const playOrPauseSong = () => {
+  if (isPlaying) {
+    pause(); // Pause the currently playing song
+  } else {
+    play(); // Play the currently paused song
+  }
+};
   
   const changeVolume = (e) => {
     let volume = e.target.value;
@@ -60,16 +126,19 @@ function App() {
       setInventory((prevInventory) => [...prevInventory, nextElement.inventoryAction.item]);
     }
   };
+//music player above//
 
-  const startGame = (name) => {
-    setUserName(name);
-    const firstElement = storyElements[0];
-    if (firstElement.inventoryAction) {
-      setInventory((prevInventory) => [...prevInventory, firstElement.inventoryAction.item]);
-    }
-    setGameText(`Welcome, ${name}! ${firstElement.text}`);
-    setCurrentElement(firstElement);
-  };
+const startGame = (name) => {
+  setUserName(name);
+  const firstElement = storyElements[0];
+  if (firstElement.inventoryAction) {
+    setInventory((prevInventory) => [...prevInventory, firstElement.inventoryAction.item]);
+  }
+  // Here you replace '${userName}' with the actual 'userName'
+  const firstElementText = firstElement.text.replace('${userName}', name);
+  setGameText(firstElementText);
+  setCurrentElement(firstElement);
+};
 
   const addItemToInventory = (item) => {
     if (!inventory.some((existingItem) => existingItem.name === item.name)) {
@@ -80,23 +149,25 @@ function App() {
   const getBackgroundStyle = () => ({
     backgroundImage: `url(${currentElement?.background || gif})`,
   });
-
+  const changeTypingSpeed = (speed) => {
+    setTypingSpeed(speed);
+  };
 
   useEffect(() => {
-    const typingStopper = typeText(gameText, setTypedText, isTypingEffectEnabled);
+    const typingStopper = typeText(currentElement?.text || '', setTypedText, isTypingEffectEnabled, typingSpeed);
     return typingStopper;
-  }, [gameText, isTypingEffectEnabled]);
+  }, [currentElement, isTypingEffectEnabled, typingSpeed]);
 
   return (
     <div className="App" style={getBackgroundStyle()}>
       <div className="image-container">
-        {currentElement?.image && (
-         <img
-         src={imageMap[currentElement.image]}
-         alt={currentElement.image}
-         className="image"
-       />
-        )}
+      {isImageVisible && currentElement?.image && (
+  <img
+    src={imageMap[currentElement.image]}
+    alt={currentElement.image}
+    className="image"
+  />
+)}
       </div>
       {isInventoryVisible && (
       <Draggable>
@@ -153,9 +224,9 @@ function App() {
           </div>
         ) : (
           <div>
-           <div className="narrative-text">
-               <p>{typedText}</p>
-            </div>
+          <div className="narrative-text">
+  <p>{typedText.replace('${userName}', userName)}</p>
+</div>
             <div className="choices">
               {currentElement?.choices.map((choice) => (
                 <button
@@ -181,22 +252,71 @@ function App() {
           </div>
         )}
       </div>  {isSettingsVisible && (
-        <div className="settings-box">
-          <h2>Settings</h2>
-          <label>
-            Enable Typing Effect:
-            <input 
-              type="checkbox" 
-              checked={isTypingEffectEnabled} 
-              onChange={() => setIsTypingEffectEnabled(!isTypingEffectEnabled)} 
-            />
-          </label>
-          <label>
-          <div className="music-controls">
-      <button onClick={isPlaying ? pause : play}>{isPlaying ? 'Pause' : 'Play'} BGM</button>
-      <input type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
-    </div>
-          </label>
+  <div className="settings-box">
+    <h2>Settings</h2>
+    <label>
+      Enable Typing Effect:
+      <input
+        type="checkbox"
+        checked={isTypingEffectEnabled}
+        onChange={() => setIsTypingEffectEnabled(!isTypingEffectEnabled)}
+      />
+    </label>
+
+    <div className="typing-speed-controls">
+  <h3>Typing Speed:</h3>
+  <label>
+    <input
+      type="radio"
+      value="slow"
+      checked={typingSpeed === 'slow'}
+      onChange={() => changeTypingSpeed('slow')}
+    />
+    Slow
+  </label>
+  <label>
+    <input
+      type="radio"
+      value="medium"
+      checked={typingSpeed === 'medium'}
+      onChange={() => changeTypingSpeed('medium')}
+    />
+    Medium
+  </label>
+  <label>
+    <input
+      type="radio"
+      value="fast"
+      checked={typingSpeed === 'fast'}
+      onChange={() => changeTypingSpeed('fast')}
+    />
+    Fast
+  </label>
+  <label>
+    <input
+      type="radio"
+      value="off"
+      checked={typingSpeed === 'off'}
+      onChange={() => changeTypingSpeed('off')}
+    />
+    Off
+  </label>
+</div>
+<div className="image-settings">
+          <h3>Image Settings</h3>
+          <button onClick={() => setIsImageVisible(!isImageVisible)}>
+            {isImageVisible ? 'Hide Image' : 'Show Image'}
+          </button>
+        </div>
+
+    {/* Music player */}
+      <div className="music-controls">
+        <h3>Background Music</h3>
+        <button onClick={previousSong}>Previous</button>
+        <button onClick={playOrPauseSong}>{isPlaying ? 'Pause' : 'Play'}</button>
+        <button onClick={nextSong}>Next</button>
+        <input type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
+      </div>
           {/* Add more settings here as needed */}
         </div>
       )}

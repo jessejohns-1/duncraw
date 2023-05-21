@@ -1,5 +1,5 @@
 import room from '../image/mainroom1.gif';
-
+import hallway from '../image/hallway.gif';
 const storyElements = [
   {
     id: 'beginning',
@@ -67,13 +67,12 @@ const storyElements = [
 ////////////////////////// search apartment ///////////////////////////////
 {
   id: 'exploration',
-  text: "You hang up the phone, the cryptic conversation with Professor Kholvaz still ringing in your ears. The apartment around you now seems like a labyrinth of mysteries waiting to be uncovered. A strange yet strong urge compels you to explore your surroundings, searching for answers to the questions swirling in your mind.\n\nAs you stride across the room, each step resonates with a soft creak on the weathered wooden floor, the sound echoing within the four walls like an ancient chant. The furnishings are simple yet carry an air of antiquity, each item a silent testament to countless stories they might have witnessed.\n\nYour hand brushes against the sturdy table, its wooden surface wearing the traces of time. You wonder who sat here before you, what they pondered, what they achieved. An unassuming chair in the corner of the room, seemingly undisturbed for a while, whispers tales of solitary moments and introspective journeys.\n\nA foggy view outside the window captures your attention. The world outside seems distant, as if blurred by the veil of forgetfulness. Turning back to the room, your eyes land on a small, dusty painting. It depicts an exotic landscape, possibly the Ionisia Kingdom that Professor Kholvaz mentioned. The colors and imagery spark a sense of déjà vu, as if you've seen it before.\n\nAs you explore, your connection with this place deepens. Yet, the more you see, the more questions arise. Who are you really? And why are you here? Amidst the growing web of mysteries, the phone begins to ring again. If you get stuck check the settings page and enable hints",
+  text: "You hang up the phone, the cryptic conversation with Professor Kholvaz still ringing in your ears. The apartment around you now seems like a labyrinth of mysteries waiting to be uncovered. A strange yet strong urge compels you to explore your surroundings, searching for answers to the questions swirling in your mind.\n\nAs you stride across the room, each step resonates with a soft creak on the weathered wooden floor, the sound echoing within the four walls like an ancient chant. The furnishings are simple yet carry an air of antiquity, each item a silent testament to countless stories they might have witnessed.\n\nYour hand brushes against the sturdy table, its wooden surface wearing the traces of time. You wonder who sat here before you, what they pondered, what they achieved. An unassuming chair in the corner of the room, seemingly undisturbed for a while, whispers tales of solitary moments and introspective journeys.\n\nA foggy view outside the window captures your attention. The world outside seems distant, as if blurred by the veil of forgetfulness. Turning back to the room, your eyes land on a small, dusty painting. It depicts an exotic landscape, possibly the Ionisia Kingdom that Professor Kholvaz mentioned. The colors and imagery spark a sense of déjà vu, as if you've seen it before.\n\nAs you explore, your connection with this place deepens. Yet, the more you see, the more questions arise. Who are you really? And why are you here? Amidst the growing web of mysteries, the phone begins to ring again.\n\n \n\nIf you get stuck check the settings page and enable hints",
   validCommands: ['phone', 'table', 'chair', 'window', 'painting'],
   background: room,
   character: 'main',
   image: 'main',
   choices: [
-    { id: 'answer', text: "Answer the phone", nextElement: 'second_call' },
     { id: 'freeform', text: "Enter a command or search term...", nextElement: 'freeform_response' }
   ],
 },
@@ -104,6 +103,8 @@ const storyElements = [
 {
   id: 'search',
   background: room,
+  character: 'key',
+  image: 'key',
   text: "You carefully examine the key in your hand, intrigued by its mysterious nature. It feels significant, as if it holds the key to unlocking a hidden secret. With determination in your eyes, you embark on a quest to find the right place to use the key.\n\nYou begin your search, exploring every nook and cranny of the room. You inspect the walls, tapping on them in hopes of discovering a hollow sound that might indicate a hidden compartment. You try the key on various locked cabinets and drawers, feeling a mix of anticipation and curiosity with each attempt.\n\nAs time passes, you become increasingly aware of the weight of the key in your hand. It serves as a constant reminder of the mysteries that await you, urging you to continue your search. Your determination grows stronger with each unsuccessful attempt, driving you to explore every inch of the room and beyond.\n\nThe search for the perfect lock to fit the key is both thrilling and challenging. Will you uncover the secret it holds? Only time will tell.",
   validCommands: ['wall', 'cabinet', 'drawer','door'],
   choices: [
@@ -190,11 +191,11 @@ const storyElements = [
 //////////////////////////searchables in apartment
 {
   id: 'hallway',
-  background: "",
+  background: hallway,
   text: "You step out of the room and find yourself in a dimly lit hallway, the faded wallpaper peeling off the walls. The air is heavy with a musty scent, a reminder of neglect and time's relentless march. The hallway stretches out before you, its length disappearing into darkness. A flickering lightbulb intermittently illuminates the corridor, casting eerie shadows that dance on the walls.\n\nAs you take your first steps, a sense of unease settles in. Each creaking floorboard beneath your feet echoes through the silence, amplifying the emptiness of the building. The doors along the hallway stand closed and weathered, hiding their secrets within. You can't help but wonder what stories lie behind those doors—tales of joy, sorrow, and forgotten dreams.\n\nThe sound of distant footsteps echoes through the hall, making you pause. Is someone else here, or is it merely an echo of memories long past? The uncertainty gnaws at you, heightening your awareness of the unfamiliar surroundings.\n\nYou steel yourself and continue down the hallway, guided by a mix of curiosity and trepidation. The unknown awaits, and with each step, you move further into the heart of the building, yearning to uncover the mysteries that shroud this forgotten place.",
   validCommands: ['back'],
   choices: [
-    { id: 'back', text: "to be continued", nextElement: 'exploration' },
+    { id: 'back', text: "to be continued", nextElement: 'null' },
   ],
 },
 ];

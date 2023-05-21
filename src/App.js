@@ -270,15 +270,6 @@ const startGame = (name) => {
       </div>  {isSettingsVisible && (
   <div className="settings-box">
     <h2>Settings</h2>
-    <label>
-      Enable Typing Effect:
-      <input
-        type="checkbox"
-        checked={isTypingEffectEnabled}
-        onChange={() => setIsTypingEffectEnabled(!isTypingEffectEnabled)}
-      />
-    </label>
-
     <div className="typing-speed-controls">
   <h3>Typing Speed:</h3>
   <label>

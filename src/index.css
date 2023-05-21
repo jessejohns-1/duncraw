@@ -33,6 +33,7 @@ body {
 
 .content {
   max-width: 80%;
+  width: 600px; /* or any suitable value */
   padding: 2rem;
   background-color: rgba(30, 30, 30, 0.8);
   border: 2px solid #ff00ff; /* Pink */
@@ -132,8 +133,10 @@ button:hover {
   }
   
   .narrative-text {
-  width: 100%;
-  height: 100%;
+    display: flex;
+    justify-content: center; /* align horizontally */
+    align-items: center; /* align vertically */
+    height: 100%; /* you'll need a height */
   }
   
   .music-controls {
@@ -173,4 +176,53 @@ button:hover {
   .content {
   padding: 1.5rem;
   }
+  .narrative-text {
+    width: 100%;
+    borderRadius: 50%;
+    z-index: 1000;
+    position: relative;
   }
+  
+  .toggle-inventory-button:hover {
+    background: linear-gradient(to right, #ff00ff, #800080); /* Pink to Purple */
+  }
+  
+  .inventory-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    color: white;
+  }
+  
+  .inventory-content p {
+    font-size: 1.5rem;
+  }
+  
+  .inventory-content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .inventory-content ul li {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .empty-inventory {
+    font-size: 0.9rem;
+    color: gray;
+  }
+  
+  .choices {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  
+  .choices button {
+    margin-top: 0.5rem;
+  }
+  }
+  

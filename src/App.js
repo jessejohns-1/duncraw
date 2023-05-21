@@ -159,9 +159,11 @@ const playOrPauseSong = () => {
 
 
   const handleUserCommand = (userCommand) => {
-    if (currentElement.validCommands.includes(userCommand.toLowerCase())) {
+    const lowerCaseUserCommand = userCommand.toLowerCase(); // Convert user command to lowercase
+  
+    if (currentElement.validCommands.includes(lowerCaseUserCommand)) {
       // if the command is valid, find the corresponding element in the story
-      const nextElement = storyElements.find((el) => el.id === userCommand);
+      const nextElement = storyElements.find((el) => el.id === lowerCaseUserCommand);
       if (nextElement) {
         setGameText(nextElement.text);
         setCurrentElement(nextElement);
@@ -173,7 +175,7 @@ const playOrPauseSong = () => {
           }
         }
       } else {
-        console.error(`Next element with ID '${userCommand}' not found.`);
+        console.error(`Next element with ID '${lowerCaseUserCommand}' not found.`);
       }
     } else {
       // if the command is not valid, provide a default response

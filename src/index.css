@@ -189,7 +189,7 @@ button:hover {
   }
   .narrative-text {
     width: 100%;
-    borderRadius: 50%;
+    border-radius: 50%;
     z-index: 1000;
     position: relative;
   }

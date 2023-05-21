@@ -8,6 +8,7 @@ import track2 from  './music/track2.mp3';
 import track3 from './music/track3.mp3';
 import track4  from './music/track4.mp3';
 import dreads from './Components/characters/dreads.png';
+import phone from './image/phone.png';
 //songs//
 const songs = [
   track1,
@@ -19,6 +20,7 @@ const songs = [
 const imageMap = {
   main: 'https://media.discordapp.net/attachments/1059614173031567402/1109330335717666846/0_1.png?width=521&height=521',
   dreads: dreads,
+  phone: phone,
   // Add more image mappings here
 };
 function App() {

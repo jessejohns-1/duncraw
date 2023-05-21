@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import storyElements from './Story/storyElements';
 import gif from './image/gif.webp';
 import Draggable from 'react-draggable';
+import {typeText} from './Components/utils';
 const imageMap = {
   main: 'https://media.discordapp.net/attachments/1059614173031567402/1109330335717666846/0_1.png?width=521&height=521',
   // Add more image mappings here
@@ -13,6 +14,13 @@ function App() {
   const [userInput, setUserInput] = useState('');
   const [inventory, setInventory] = useState([{ name: 'this is the item', description: 'A small, furry friend.'},]);
   const [isInventoryVisible, setIsInventoryVisible] = useState(false);
+  const [typedText, setTypedText] = useState('');
+  const [isTypingEffectEnabled, setIsTypingEffectEnabled] = useState(true);
+  const [isSettingsVisible, setIsSettingsVisible] = useState(false);
+
+  const toggleSettingsVisibility = () => {
+    setIsSettingsVisible(!isSettingsVisible);
+  };
 
   
   const handleChoiceClick = (choice) => {
@@ -44,22 +52,21 @@ function App() {
     backgroundImage: `url(${currentElement?.background || gif})`,
   });
 
+
+  useEffect(() => {
+    const typingStopper = typeText(gameText, setTypedText, isTypingEffectEnabled);
+    return typingStopper;
+  }, [gameText, isTypingEffectEnabled]);
+
   return (
     <div className="App" style={getBackgroundStyle()}>
-    <div className="character-container">
-        {currentElement?.character === 'main' && (
-          <img
-            src={imageMap.main}
-            alt="Main Character"
-            className="character main"
-          />
-        )}
-        {currentElement?.character === 'other' && (
-          <img
-            src={imageMap.other}
-            alt="Other Character"
-            className="character other"
-          />
+      <div className="image-container">
+        {currentElement?.image && (
+         <img
+         src={imageMap[currentElement.image]}
+         alt={currentElement.image}
+         className="image"
+       />
         )}
       </div>
       {isInventoryVisible && (
@@ -104,7 +111,7 @@ function App() {
         </button>
       )}
       <div className="content">
-        <h1>Welcome to Duncraw</h1>
+        <h1>Duncraw</h1>
         {!userName ? (
           <div className="game-title">
             <input
@@ -117,8 +124,8 @@ function App() {
           </div>
         ) : (
           <div>
-            <div className="narrative">
-              <p>{gameText}</p>
+           <div className="narrative-text">
+               <p>{typedText}</p>
             </div>
             <div className="choices">
               {currentElement?.choices.map((choice) => (
@@ -141,9 +148,26 @@ function App() {
                 </button>
               ))}
             </div>
+            
           </div>
         )}
-      </div>
+      </div> {isSettingsVisible && (
+        <div className="settings-box">
+          <h2>Settings</h2>
+          <label>
+            Enable Typing Effect:
+            <input 
+              type="checkbox" 
+              checked={isTypingEffectEnabled} 
+              onChange={() => setIsTypingEffectEnabled(!isTypingEffectEnabled)} 
+            />
+          </label>
+          {/* Add more settings here as needed */}
+        </div>
+      )}
+     <button className="button-settings" onClick={toggleSettingsVisibility}>
+  {isSettingsVisible ? 'Hide Settings' : 'Show Settings'}
+</button>
     </div>
   );
 };

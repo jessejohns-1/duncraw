@@ -116,28 +116,22 @@ header {
   border: 2px solid #FF00FF; /* Pink */
   border-radius: 5px;
 }
-.character-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
+.button-settings {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
 }
-
-.character {
-  max-width: 300px;
-  border: 2px solid #FF00FF; /* Pink */
-  border-radius: 5px;
+.settings-box {
+  position: fixed;
+  top: 50px;
+  left: 10px;
+  z-index: 999;
 }
-
-.main {
-  margin-right: 1rem;
+.narrative-text {
+  width: 100%; /* Replace with desired width */
+  height: 100%; /* Replace with desired height */
 }
-
-.other {
-  margin-left: 1rem;
-}
-
-
 @media (max-width: 600px) {
   .App {
     font-size: 0.8rem;

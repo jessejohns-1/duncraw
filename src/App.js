@@ -54,6 +54,7 @@ function App() {
     setIsSettingsVisible(!isSettingsVisible);
   };
 
+
   //music player//
 
   useEffect(() => {
@@ -284,16 +285,34 @@ const startGame = (name) => {
           </div>
         ) : (
           <div>
-          <div className="narrative-text">
-  <p>{typedText.replace('userName', userName)}</p>
+         <div className="narrative-text">
+  <p>
+    {typedText
+      .split(/\b(\w+)\b/)
+      .map((word, index) => {
+        const isKeyword =
+          currentElement &&
+          currentElement.validCommands &&
+          currentElement.validCommands.includes(word.toLowerCase());
+        return (
+          <span key={index} style={{ color: isKeyword ? 'green' : 'inherit' }}>
+            {word}
+          </span>
+        );
+      })}
+  </p>
 </div>
-            <div className="choices">
+          <div className="choices">
             {currentElement?.choices.map((choice) =>
-  choice.id === 'freeform' ? (
-    <div key={choice.id}>
-      <input type="text" value={userCommand} onChange={(e) => setUserCommand(e.target.value)} />
-      <button onClick={() => handleChoiceClick(choice)}>Submit</button>
-    </div>
+              choice.id === 'freeform' ? (
+                <div key={choice.id}>
+                  <input
+                    type="text"
+                    value={userCommand}
+                    onChange={(e) => setUserCommand(e.target.value)}
+                  />
+                  <button onClick={() => handleChoiceClick(choice)}>Submit</button>
+                </div>
   ) : (
     <button
       key={choice.id}
@@ -370,7 +389,7 @@ const startGame = (name) => {
         <input type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
       </div>
       <div className="hints-controls">
-            <h3>Show Hints:</h3>
+            <h3>cheat i meant hint</h3>
             <label>
               <input
                 type="checkbox"

@@ -91,6 +91,7 @@ const storyElements = [
   id: 'table',
   background: room,
   text: "You approach the table, its surface adorned with a thin layer of dust. Various objects rest upon it, seemingly frozen in time. There is a collection of antique books, an ornate candlestick, and a small wooden box. As you run your fingers along the table's edges, you notice a hidden compartment beneath the books. With a gentle pull, the compartment slides open, revealing a mysterious key.",
+  image: 'key',
   inventoryAction: {
     type: "add",
     item: {
@@ -117,6 +118,8 @@ const storyElements = [
   id: 'chair',
   background: room,
   text: "You approach the chair in the corner of the room. It is a simple wooden chair, worn from years of use. As you inspect it, you notice faint indentations on the seat, suggesting that someone spent a significant amount of time sitting here. The chair seems to hold stories of contemplation and solitude, but there is nothing else of note about it.",
+  character: 'chair',
+  image: 'chair',
   validCommands: ['back'],
   choices: [
     { id: 'back', text: "Go back", nextElement: 'exploration' },
@@ -132,8 +135,9 @@ const storyElements = [
   ],
 },{
   id: 'painting',
-  background: 'painting.jpg',
-  text: "As you step closer to the painting, you're immediately captivated by its mesmerizing beauty. The canvas is filled with an intricate tapestry of colors, expertly blended together to evoke a sense of awe and wonder. The brushstrokes are masterful, each stroke revealing the artist's skill and passion. You find yourself getting lost in the details, as if the painting holds a secret world within its frame. It's a true work of art that effortlessly transports you to another realm, where emotions and imagination intertwine. You can't help but admire the artist's talent and dedication in bringing such a masterpiece to life.",
+  background: room,
+  image: 'painting',
+  text: "As you step closer to the painting, you're immediately captivated by its mesmerizing beauty. The canvas reveals a lush green forest, its vibrant hues inviting you to explore its depths. The artist has skillfully captured the essence of nature, creating a captivating landscape that exudes tranquility and serenity. Amidst the verdant foliage, an unexpected sight catches your eye – a figure proudly standing in a gleaming metal suit. The contrast between the natural surroundings and the technological presence is striking, hinting at a juxtaposition between two contrasting worlds. Pixels of a different biome, reminiscent of a desert, intermingle with the forest, forming a surreal and intriguing amalgamation of environments. The blending of these distinct elements adds an element of mystery and curiosity to the painting, leaving you pondering the connection between the man in the metal suit and the contrasting biomes. The golden trim that frames the artwork enhances its overall elegance and allure. The intricate details of the golden trim sparkle in the light, drawing attention to the central composition. It serves as a symbolic border between the realms depicted within the painting, emphasizing the coexistence of different worlds within a single frame. This artwork is a true work of art that effortlessly transports you to another realm, where emotions and imagination intertwine. You can't help but admire the artist's talent and dedication in bringing such a masterpiece to life.",
   validCommands: ['back'],
   choices: [
     { id: 'back', text: 'Go back', nextElement: 'exploration' },
@@ -141,9 +145,18 @@ const storyElements = [
 },
 //////////////////keyhole
 {
-  id: 'wall',
+  id: 'walls',
   background: room,
   text: "You approach the wall, running your hand along its surface. It feels solid and unyielding, like a barrier protecting hidden secrets. As you inspect it more closely, you notice a subtle irregularity in the texture. There is a hairline crack that extends from floor to ceiling, almost invisible to the naked eye. Your curiosity piqued, you wonder if this crack holds any significance or leads to something hidden beyond the wall.\n\nYou contemplate the meaning behind this mysterious crack and its potential connection to the key in your possession. Could it be a concealed entrance or a symbol of a deeper mystery? The answer lies within the secrets that await your discovery.\n\nYou step back, taking in the entirety of the wall, determined to unravel its enigma. With the key in hand, you can't help but wonder if it is the key that will unlock the truth hidden behind this seemingly ordinary surface.",
+  choices: [
+    { id: 'back', text: "Go back", nextElement: 'search' },
+  ],
+},
+
+{
+  id: 'cabinets',
+  background: room,
+  text: "You approach the cabinet, its polished surface reflecting a glimmer of light. The cabinet is sturdy, with ornate carvings and brass handles. As you open the doors, a faint scent of aged wood wafts through the air. Inside, you find an assortment of objects neatly arranged on shelves. There are old photographs, delicate porcelain figurines, and a stack of dusty journals.\n\nYou carefully inspect each item, searching for any hidden compartments or clues. Your fingertips trace the engravings on the figurines, your eyes scanning the faded photographs for familiar faces. The journals beckon you to uncover their secrets, but they remain locked with an air of mystery.\n\nAs you explore the contents of the cabinet, you can't help but wonder if the key you possess might hold the answer to unlocking the hidden treasures within. Could it be that the cabinet conceals more than meets the eye? Only further investigation will reveal the truth.",
   validCommands: ['back'],
   choices: [
     { id: 'back', text: "Go back", nextElement: 'search' },
@@ -151,22 +164,12 @@ const storyElements = [
 },
 
 {
-  id: 'cabinet',
-  background: room,
-  text: "You approach the cabinet, its polished surface reflecting a glimmer of light. The cabinet is sturdy, with ornate carvings and brass handles. As you open the doors, a faint scent of aged wood wafts through the air. Inside, you find an assortment of objects neatly arranged on shelves. There are old photographs, delicate porcelain figurines, and a stack of dusty journals.\n\nYou carefully inspect each item, searching for any hidden compartments or clues. Your fingertips trace the engravings on the figurines, your eyes scanning the faded photographs for familiar faces. The journals beckon you to uncover their secrets, but they remain locked with an air of mystery.\n\nAs you explore the contents of the cabinet, you can't help but wonder if the key you possess might hold the answer to unlocking the hidden treasures within. Could it be that the cabinet conceals more than meets the eye? Only further investigation will reveal the truth.",
-  validCommands: ['back'],
-  choices: [
-    { id: 'back', text: "Go back", nextElement: 'exploration' },
-  ],
-},
-
-{
-  id: 'drawer',
+  id: 'drawers',
   background: room,
   text: "You approach the drawer, its wooden surface smooth to the touch. It is a modest drawer, unadorned and blending seamlessly with the surrounding furniture. As you pull it open, a faint scent of cedar fills the air, reminiscent of memories long past. Inside, you find an array of items meticulously organized. There are bundles of handwritten letters, delicate trinkets, and a small brass key nestled among them.\n\nYou carefully examine each item, immersing yourself in the stories they hold. The letters, inked with emotions, reveal snippets of heartfelt conversations. The trinkets, worn with time, whisper tales of cherished moments. Your gaze fixates on the brass key, a tangible link to a hidden world waiting to be unlocked.\n\nAs you delve deeper into the contents of the drawer, you can't help but wonder what secrets it holds. Could the key you possess be the missing piece to unraveling the enigma within? The answers lie within these tangible fragments of the past, beckoning you to uncover their hidden truths.",
   validCommands: ['back'],
   choices: [
-    { id: 'back', text: "Go back", nextElement: 'exploration' },
+    { id: 'back', text: "Go back", nextElement: 'search' },
   ],
 },
 {

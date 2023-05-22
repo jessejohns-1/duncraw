@@ -7,11 +7,7 @@ import track1 from './music/track1.mp3';
 import track2 from  './music/track2.mp3';
 import track3 from './music/track3.mp3';
 import track4  from './music/track4.mp3';
-import dreads from './Components/characters/dreads.png';
-import phone from './image/phone.png';
-import window from './image/city.gif';
-import hallway from './image/hallway.gif';
-import key from './image/key.png'
+import imageMap from './Components/imageMap';
 //songs//
 const songs = [
   track1,
@@ -20,15 +16,7 @@ const songs = [
   track4
 ]
 //songs//
-const imageMap = {
-  main: 'https://media.discordapp.net/attachments/1059614173031567402/1109330335717666846/0_1.png?width=521&height=521',
-  dreads: dreads,
-  phone: phone,
-  window: window,
-  hallway: hallway,
-  key: key,
-  // Add more image mappings here
-};
+
 function App() {
   const [gameText, setGameText] = useState('Welcome to the game! Press "Start" to begin.');
   const [currentElement, setCurrentElement] = useState(null);

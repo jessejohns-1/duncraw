@@ -337,7 +337,7 @@ const startGame = (name) => {
                 <p>Inventory & Companion:</p>
                 <ul>
                   {inventory.length === 0 ? (
-                    <p className="empty-inventory">Your inventory is currently empty.</p>
+                    <p className="empty-inventory"></p>
                   ) : (
                     inventory.map((item, index) => (
                       <li key={index}>

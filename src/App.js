@@ -185,7 +185,13 @@ const playOrPauseSong = () => {
   };
 //music player above//
 useEffect(() => {
-  const typingStopper = typeText(currentElement?.text || '', setTypedText, isTypingEffectEnabled, typingSpeed);
+  const typingStopper = typeText(
+    currentElement?.text || '',
+    setTypedText,
+    isTypingEffectEnabled,
+    typingSpeed,
+    currentElement?.validCommands || []
+  );
   return typingStopper;
 }, [currentElement, isTypingEffectEnabled, typingSpeed]);
 
@@ -195,8 +201,8 @@ const startGame = (name) => {
   if (firstElement.inventoryAction) {
     setInventory((prevInventory) => [...prevInventory, firstElement.inventoryAction.item]);
   }
-  // Here you replace '${userName}' with the actual 'userName'
-  const firstElementText = firstElement.text.replace('${userName}', name);
+  const firstElementText = firstElement.text.replace('userName', name);
+  firstElement.text = firstElementText;
   setGameText(firstElementText);
   setCurrentElement(firstElement);
 };
@@ -272,36 +278,36 @@ const startGame = (name) => {
         </button>
       )}
       <div className="content">
-        <h1>Duncraw</h1>
-        {!userName ? (
-          <div className="game-title">
-            <input
-              type="text"
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Enter your name..."
-            />
-            <button onClick={() => startGame(userInput)}>Start Game</button>
-          </div>
-        ) : (
-          <div>
-         <div className="narrative-text">
-  <p>
-    {typedText
-      .split(/\b(\w+)\b/)
-      .map((word, index) => {
-        const isKeyword =
-          currentElement &&
-          currentElement.validCommands &&
-          currentElement.validCommands.includes(word.toLowerCase());
-        return (
-          <span key={index} style={{ color: isKeyword ? 'green' : 'inherit' }}>
-            {word}
-          </span>
-        );
-      })}
-  </p>
-</div>
+  <h1>Duncraw</h1>
+  {!userName ? (
+    <div className="game-title">
+      <input
+        type="text"
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        placeholder="Enter your name..."
+      />
+      <button onClick={() => startGame(userInput)}>Start Game</button>
+    </div>
+  ) : (
+    <div>
+      <div className="narrative-text">
+        <p>
+          {typedText
+            .split(/\b(\w+)\b/)
+            .map((word, index) => {
+              const isKeyword =
+                currentElement &&
+                currentElement.validCommands &&
+                currentElement.validCommands.includes(word.toLowerCase());
+              return (
+                <span key={index} style={{ color: isKeyword ? 'green' : 'inherit' }}>
+                  {word}
+                </span>
+              );
+            })}
+        </p>
+      </div>
           <div className="choices">
             {currentElement?.choices.map((choice) =>
               choice.id === 'freeform' ? (

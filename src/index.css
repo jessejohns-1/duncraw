@@ -23,6 +23,7 @@ body {
   overflow-y: auto;
   outline: none;
   border: none;
+  padding-top: 60px; /* Add padding for the navbar */
 }
 
 .draggable-inventory {
@@ -89,16 +90,22 @@ button:hover {
   z-index: 1000;
 }
 
-.toggle-inventory-button {
-  padding: 0.5rem;
+.toggle-inventory-button,
+.button-settings {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
   border: none;
-  background: linear-gradient(to right, #800080, #ff00ff); /* Purple to Pink */
+  background: linear-gradient(to right, #800080, #ff00ff);
   color: white;
   cursor: pointer;
   transition: all 0.5s ease;
   border-radius: 5px;
-  z-index: 1000;
-  }
+}
+.toggle-inventory-button:hover,
+.button-settings:hover {
+  background: linear-gradient(to right, #ff00ff, #800080);
+  transform: scale(1.05);
+}
   
   .inventory-box h3 {
   color: #800080; /* Purple */
@@ -173,6 +180,78 @@ button:hover {
   .choices button {
     margin-top: 0.5rem;
   }
+
+
+
+  .top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+  
+  .top-nav button {
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: linear-gradient(to right, #800080, #ff00ff);
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    border-radius: 5px;
+  }
+  
+  .top-nav button:hover {
+    background: linear-gradient(to right, #ff00ff, #800080);
+    transform: scale(1.05);
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  .nav-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+  .nav-buttons {
+    padding-right: 1rem;
+  }
+
+  .button-settings {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: linear-gradient(to right, #800080, #ff00ff);
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    border-radius: 5px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+  }
+  
+  .button-settings:hover {
+    background: linear-gradient(to right, #ff00ff, #800080);
+    transform: scale(1.05);
+  }
+
+
+
+
+
+
+
   @media (max-width: 600px) {
   .App {
   font-size: 0.8rem;

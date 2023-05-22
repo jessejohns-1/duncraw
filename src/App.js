@@ -36,7 +36,7 @@ function App() {
   const [userInput, setUserInput] = useState('');
   //{ name: 'this is the item', description: 'A small, furry friend.'},// for inventory
   const [inventory, setInventory] = useState([]);
-  const [isInventoryVisible, setIsInventoryVisible] = useState(false);
+  const [isInventoryVisible, setIsInventoryVisible] = useState(true);
   const [typedText, setTypedText] = useState('');
   const [isTypingEffectEnabled, setIsTypingEffectEnabled] = useState(true);
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -228,202 +228,194 @@ const startGame = (name) => {
   return (
     <div className="App" style={getBackgroundStyle()}>
       <div className="image-container">
-      {isImageVisible && currentElement?.image && (
-  <img
-    src={imageMap[currentElement.image]}
-    alt={currentElement.image}
-    className="image"
-  />
-)}
+        {isImageVisible && currentElement?.image && (
+          <img
+            src={imageMap[currentElement.image]}
+            alt={currentElement.image}
+            className="image"
+          />
+        )}
       </div>
-      {isInventoryVisible && (
-      <Draggable>
-      <div className="draggable-inventory">
-        <div className="inventory-box">
-          <button
-            className="toggle-inventory-button"
-            onClick={() => setIsInventoryVisible(!isInventoryVisible)}
-            onTouchStart={() => setIsInventoryVisible(!isInventoryVisible)}
-          >
-            <i className="fas fa-window-minimize"></i>
-          </button>
-          <div className="inventory-content">
-            <p>Inventory & Companion:</p>
-            <ul>
-              {inventory.length === 0 ? (
-                <p className="empty-inventory">Your inventory is currently empty.</p>
-              ) : (
-                inventory.map((item, index) => (
-                  <li key={index}>
-                    <div>
-                      <strong>{item.name}</strong>
-                      <h5>{item.description}</h5>
-                    </div>
-                  </li>
-                ))
-              )}
-            </ul>
+      
+      <nav className="top-nav">
+        <div className="nav-brand-container">
+          <div className="nav-brand">
           </div>
         </div>
-      </div>
-    </Draggable>
-      )}
-      {!isInventoryVisible && (
-        <button
-          className="toggle-inventory-button"
-          onClick={() => setIsInventoryVisible(!isInventoryVisible)}
-          onTouchStart={() => setIsInventoryVisible(!isInventoryVisible)}
-        >
-          <i className="fas fa-window-maximize"> inventory</i>
-        </button>
-      )}
+        <div className="nav-buttons">
+          {/* Settings button */}
+          <button className="button-settings" onClick={toggleSettingsVisibility}>
+            {isSettingsVisible ? 'Hide Settings' : 'Show Settings'}
+          </button>
+  
+          {/* Inventory toggle button */}
+          {isInventoryVisible ? null : (
+  <button
+    className="toggle-inventory-button"
+    onClick={() => setIsInventoryVisible(!isInventoryVisible)}
+    onTouchStart={() => setIsInventoryVisible(!isInventoryVisible)}
+  >
+    <i className="fas fa-window-maximize"></i> Inventory
+            </button>
+          )}
+        </div>
+      </nav>
+  
+  
       <div className="content">
-  <h1>Duncraw</h1>
-  {!userName ? (
-    <div className="game-title">
-      <input
-        type="text"
-        value={userInput}
-        onChange={(e) => setUserInput(e.target.value)}
-        placeholder="Enter your name..."
-      />
-      <button onClick={() => startGame(userInput)}>Start Game</button>
-    </div>
-  ) : (
-    <div>
-      <div className="narrative-text">
-        <p>
-          {typedText
-            .split(/\b(\w+)\b/)
-            .map((word, index) => {
-              const isKeyword =
-                currentElement &&
-                currentElement.validCommands &&
-                currentElement.validCommands.includes(word.toLowerCase());
-              return (
-                <span key={index} style={{ color: isKeyword ? 'green' : 'inherit' }}>
-                  {word}
-                </span>
-              );
-            })}
-        </p>
-      </div>
-          <div className="choices">
-            {currentElement?.choices.map((choice) =>
-              choice.id === 'freeform' ? (
-                <div key={choice.id}>
-                  <input
-                    type="text"
-                    value={userCommand}
-                    onChange={(e) => setUserCommand(e.target.value)}
-                  />
-                  <button onClick={() => handleChoiceClick(choice)}>Submit</button>
-                </div>
-  ) : (
-    <button
-      key={choice.id}
-      onClick={() => {
-        if (choice.item) {
-          addItemToInventory(choice.item);
-        }
-        handleChoiceClick(choice);
-      }}
-    >
-      {choice.text}
-    </button>
-  )
-)}
+        <h1>Duncraw</h1>
+        {!userName ? (
+          <div className="game-title">
+            <input
+              type="text"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              placeholder="Enter your name..."
+            />
+            <button onClick={() => startGame(userInput)}>Start Game</button>
+          </div>
+        ) : (
+          <div>
+            <div className="narrative-text">
+              <p>
+                {typedText
+                  .split(/\b(\w+)\b/)
+                  .map((word, index) => {
+                    const isKeyword =
+                      currentElement &&
+                      currentElement.validCommands &&
+                      currentElement.validCommands.includes(word.toLowerCase());
+                    return (
+                      <span key={index} style={{ color: isKeyword ? 'green' : 'inherit' }}>
+                        {word}
+                      </span>
+                    );
+                  })}
+              </p>
             </div>
-            
+            <div className="choices">
+              {currentElement?.choices.map((choice) =>
+                choice.id === 'freeform' ? (
+                  <div key={choice.id}>
+                    <input
+                      type="text"
+                      value={userCommand}
+                      onChange={(e) => setUserCommand(e.target.value)}
+                    />
+                    <button onClick={() => handleChoiceClick(choice)}>Submit</button>
+                  </div>
+                ) : (
+                  <button
+                    key={choice.id}
+                    onClick={() => {
+                      if (choice.item) {
+                        addItemToInventory(choice.item);
+                      }
+                      handleChoiceClick(choice);
+                    }}
+                  >
+                    {choice.text}
+                  </button>
+                )
+              )}
+            </div>
           </div>
         )}
-      </div>  {isSettingsVisible && (
-  <div className="settings-box">
-    <h2>Settings</h2>
-    <div className="typing-speed-controls">
-  <h3>Typing Speed:</h3>
-  <label>
-    <input
-      type="radio"
-      value="slow"
-      checked={typingSpeed === 'slow'}
-      onChange={() => changeTypingSpeed('slow')}
-    />
-    Slow
-  </label>
-  <label>
-    <input
-      type="radio"
-      value="medium"
-      checked={typingSpeed === 'medium'}
-      onChange={() => changeTypingSpeed('medium')}
-    />
-    Medium
-  </label>
-  <label>
-    <input
-      type="radio"
-      value="fast"
-      checked={typingSpeed === 'fast'}
-      onChange={() => changeTypingSpeed('fast')}
-    />
-    Fast
-  </label>
-  <label>
-    <input
-      type="radio"
-      value="off"
-      checked={typingSpeed === 'off'}
-      onChange={() => changeTypingSpeed('off')}
-    />
-    Off
-  </label>
-</div>
-<div className="image-settings">
+      </div>
+      {isInventoryVisible && (
+        <Draggable>
+          <div className="draggable-inventory">
+            <div className="inventory-box">
+              <button
+                className="toggle-inventory-button"
+                onClick={() => setIsInventoryVisible(!isInventoryVisible)}
+                onTouchStart={() => setIsInventoryVisible(!isInventoryVisible)}
+              >
+                <i className="fas fa-window-minimize"></i>
+              </button>
+              <div className="inventory-content">
+                <p>Inventory & Companion:</p>
+                <ul>
+                  {inventory.length === 0 ? (
+                    <p className="empty-inventory">Your inventory is currently empty.</p>
+                  ) : (
+                    inventory.map((item, index) => (
+                      <li key={index}>
+                        <div>
+                          <strong>{item.name}</strong>
+                          <h5>{item.description}</h5>
+                      </div>
+                    </li>
+                  ))
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Draggable>
+    )}
+    {isSettingsVisible && (
+      <div className="settings-box">
+        <h2>Settings</h2>
+        <div className="typing-speed-controls">
+          <h3>Typing Speed:</h3>
+          <label>
+            <input
+              type="radio"
+              value="slow"
+              checked={typingSpeed === 'slow'}
+              onChange={() => changeTypingSpeed('slow')}
+            />
+            Slow
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="medium"
+              checked={typingSpeed === 'medium'}
+              onChange={() => changeTypingSpeed('medium')}
+            />
+            Medium
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="fast"
+              checked={typingSpeed === 'fast'}
+              onChange={() => changeTypingSpeed('fast')}
+            />
+            Fast
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="off"
+              checked={typingSpeed === 'off'}
+              onChange={() => changeTypingSpeed('off')}
+            />
+            Off
+          </label>
+        </div>
+        <div className="image-settings">
           <h3>Image Settings</h3>
           <button onClick={() => setIsImageVisible(!isImageVisible)}>
             {isImageVisible ? 'Hide Image' : 'Show Image'}
           </button>
         </div>
 
-    {/* Music player */}
-      <div className="music-controls">
-        <h3>Background Music</h3>
-        <button onClick={previousSong}>Previous</button>
-        <button onClick={playOrPauseSong}>{isPlaying ? 'Pause' : 'Play'}</button>
-        <button onClick={nextSong}>Next</button>
-        <input type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
-      </div>
-      <div className="hints-controls">
-            <h3>cheat i meant hint</h3>
-            <label>
-              <input
-                type="checkbox"
-                checked={showHints}
-                onChange={() => setShowHints(!showHints)}
-              />
-              Show hints
-            </label>
-          </div>
-
-          {/* Valid Commands Display */}
-          {showHints && currentElement && currentElement.validCommands && (
-            <div className="valid-commands">
-              <h3>Valid Commands:</h3>
-              <ul>
-                {currentElement.validCommands.map((command, index) => (
-                  <li key={index}>{command}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+        {/* Music player */}
+        <div className="music-controls">
+          <h3>Background Music</h3>
+          <button onClick={previousSong}>Previous</button>
+          <button onClick={playOrPauseSong}>{isPlaying ? 'Pause' : 'Play'}</button>
+          <button onClick={nextSong}>Next</button>
+          <input type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
         </div>
-      )}
-     <button className="button-settings" onClick={toggleSettingsVisibility}>
-  {isSettingsVisible ? 'Hide Settings' : 'Show Settings'}
-</button>
-    </div>
-  );
-};
+        <div className="hints-controls">{/* Add your hints controls here */}</div>
+      </div>
+    )}
+  </div>
+);
+}
 
 export default App;

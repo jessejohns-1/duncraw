@@ -2,27 +2,23 @@ import React, { useState, useEffect, useRef } from 'react';
 import storyElements from './Story/storyElements';
 import gif from './image/gif.webp';
 import Draggable from 'react-draggable';
-import {typeText} from './Components/utils';
+import { typeText } from './Components/utils';
 import track1 from './music/track1.mp3';
-import track2 from  './music/track2.mp3';
+import track2 from './music/track2.mp3';
 import track3 from './music/track3.mp3';
-import track4  from './music/track4.mp3';
+import track4 from './music/track4.mp3';
 import imageMap from './Components/imageMap';
-//songs//
-const songs = [
-  track1,
-  track2,
-  track3,
-  track4
-]
-//songs//
+import { Button, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// Songs
+const songs = [track1, track2, track3, track4];
 
 function App() {
   const [gameText, setGameText] = useState('Welcome to the game! Press "Start" to begin.');
   const [currentElement, setCurrentElement] = useState(null);
   const [userName, setUserName] = useState('');
   const [userInput, setUserInput] = useState('');
-  //{ name: 'this is the item', description: 'A small, furry friend.'},// for inventory
   const [inventory, setInventory] = useState([]);
   const [isInventoryVisible, setIsInventoryVisible] = useState(true);
   const [typedText, setTypedText] = useState('');
@@ -42,15 +38,13 @@ function App() {
     setIsSettingsVisible(!isSettingsVisible);
   };
 
-
-  //music player//
-
+  // Music player
   useEffect(() => {
     bgm.current = new Audio(songs[currentSongIndex]);
-    bgm.current.loop = false; // Stop looping so we can play the next song
+    bgm.current.loop = false;
     bgm.current.play();
     bgm.current.volume = 0.1;
-    // When the song ends, increment the song index and start the next song
+
     bgm.current.onended = () => {
       setCurrentSongIndex((prevIndex) => {
         const nextIndex = (prevIndex + 1) % songs.length;
@@ -59,67 +53,69 @@ function App() {
         return nextIndex;
       });
     };
-  
+
     return () => {
-      // Clean up the audio when the component unmounts
       bgm.current.pause();
       bgm.current = null;
     };
   }, [currentSongIndex]);
-  
 
   useEffect(() => {
     play();
   }, []);
+
   const play = () => {
     bgm.current.play();
     setIsPlaying(true);
   };
+
   const previousSong = () => {
-    setIsPlaying(false); // Pause the current song
+    setIsPlaying(false);
     setCurrentSongIndex((prevIndex) => {
-      const prevSongIndex = (prevIndex - 1 + songs.length) % songs.length; // Calculate the index of the previous song
-      bgm.current.pause(); // Pause the current song
-      bgm.current = new Audio(songs[prevSongIndex]); // Load the previous song
-      bgm.current.play(); // Play the previous song
-      setIsPlaying(true); // Set the state to playing
-      return prevSongIndex; // Update the current song index
+      const prevSongIndex = (prevIndex - 1 + songs.length) % songs.length;
+      bgm.current.pause();
+      bgm.current = new Audio(songs[prevSongIndex]);
+      bgm.current.play();
+      setIsPlaying(true);
+      return prevSongIndex;
     });
   };
- const nextSong = () => {
-  setIsPlaying(false); // Pause the current song
-  setCurrentSongIndex((prevIndex) => {
-    const nextSongIndex = (prevIndex + 1) % songs.length; // Calculate the index of the next song
-    bgm.current.pause(); // Pause the current song
-    bgm.current = new Audio(songs[nextSongIndex]); // Load the next song
-    bgm.current.play(); // Play the next song
-    setIsPlaying(true); // Set the state to playing
-    return nextSongIndex; // Update the current song index
-  });
-};
-const pause = () => {
-  bgm.current.pause();
-  setIsPlaying(false);
-};
-const playOrPauseSong = () => {
-  if (isPlaying) {
-    pause(); // Pause the currently playing song
-  } else {
-    play(); // Play the currently paused song
-  }
-};
-  
+
+  const nextSong = () => {
+    setIsPlaying(false);
+    setCurrentSongIndex((prevIndex) => {
+      const nextSongIndex = (prevIndex + 1) % songs.length;
+      bgm.current.pause();
+      bgm.current = new Audio(songs[nextSongIndex]);
+      bgm.current.play();
+      setIsPlaying(true);
+      return nextSongIndex;
+    });
+  };
+
+  const pause = () => {
+    bgm.current.pause();
+    setIsPlaying(false);
+  };
+
+  const playOrPauseSong = () => {
+    if (isPlaying) {
+      pause();
+    } else {
+      play();
+    }
+  };
+
   const changeVolume = (e) => {
     let volume = e.target.value;
     bgm.current.volume = volume;
     setVolume(volume);
   };
-  
+
   useEffect(() => {
     isBGMPlaying ? bgm.current.play() : bgm.current.pause();
   }, [isBGMPlaying]);
-  //music
-
+  // Music player above
 
   const handleChoiceClick = (choice) => {
     if (choice.id === 'freeform') {
@@ -137,21 +133,18 @@ const playOrPauseSong = () => {
       }
     }
   };
+
   const addItemToInventory = (item) => {
-    // Check if the item already exists in the inventory
     const isItemInInventory = inventory.some((existingItem) => existingItem.name === item.name);
     if (!isItemInInventory) {
       setInventory((prevInventory) => [...prevInventory, item]);
     }
   };
 
-
-
   const handleUserCommand = (userCommand) => {
-    const lowerCaseUserCommand = userCommand.toLowerCase(); // Convert user command to lowercase
-  
+    const lowerCaseUserCommand = userCommand.toLowerCase();
+
     if (currentElement.validCommands.includes(lowerCaseUserCommand)) {
-      // if the command is valid, find the corresponding element in the story
       const nextElement = storyElements.find((el) => el.id === lowerCaseUserCommand);
       if (nextElement) {
         setGameText(nextElement.text);
@@ -167,45 +160,40 @@ const playOrPauseSong = () => {
         console.error(`Next element with ID '${lowerCaseUserCommand}' not found.`);
       }
     } else {
-      // if the command is not valid, provide a default response
       setGameText("You don't know how to do that.");
     }
   };
-//music player above//
-useEffect(() => {
-  const typingStopper = typeText(
-    currentElement?.text || '',
-    setTypedText,
-    isTypingEffectEnabled,
-    typingSpeed,
-    currentElement?.validCommands || []
-  );
-  return typingStopper;
-}, [currentElement, isTypingEffectEnabled, typingSpeed]);
 
-const startGame = (name) => {
-  setUserName(name);
-  const firstElement = storyElements[0];
-  if (firstElement.inventoryAction) {
-    setInventory((prevInventory) => [...prevInventory, firstElement.inventoryAction.item]);
-  }
-  const firstElementText = firstElement.text.replace('userName', name);
-  firstElement.text = firstElementText;
-  setGameText(firstElementText);
-  setCurrentElement(firstElement);
-};
+  useEffect(() => {
+    const typingStopper = typeText(
+      currentElement?.text || '',
+      setTypedText,
+      isTypingEffectEnabled,
+      typingSpeed,
+      currentElement?.validCommands || []
+    );
+    return typingStopper;
+  }, [currentElement, isTypingEffectEnabled, typingSpeed]);
 
+  const startGame = (name) => {
+    setUserName(name);
+    const firstElement = storyElements[0];
+    if (firstElement.inventoryAction) {
+      setInventory((prevInventory) => [...prevInventory, firstElement.inventoryAction.item]);
+    }
+    const firstElementText = firstElement.text.replace('userName', name);
+    firstElement.text = firstElementText;
+    setGameText(firstElementText);
+    setCurrentElement(firstElement);
+  };
 
   const getBackgroundStyle = () => ({
     backgroundImage: `url(${currentElement?.background || gif})`,
   });
+
   const changeTypingSpeed = (speed) => {
     setTypingSpeed(speed);
-    if (speed === 'off') {
-      setIsTypingEffectEnabled(false);
-    } else {
-      setIsTypingEffectEnabled(true);
-    }
+    setIsTypingEffectEnabled(speed !== 'off');
   };
 
   useEffect(() => {
@@ -217,54 +205,63 @@ const startGame = (name) => {
     <div className="App" style={getBackgroundStyle()}>
       <div className="image-container">
         {isImageVisible && currentElement?.image && (
-          <img
-            src={imageMap[currentElement.image]}
-            alt={currentElement.image}
-            className="image"
-          />
+          <img src={imageMap[currentElement.image]} alt={currentElement.image} className="image" />
         )}
       </div>
-      
-      <nav className="top-nav">
-        <div className="nav-brand-container">
-          <div className="nav-brand">
-          </div>
-        </div>
-        <div className="nav-buttons">
-          {/* Settings button */}
-          <button className="button-settings" onClick={toggleSettingsVisibility}>
-            {isSettingsVisible ? 'Hide Settings' : 'Show Settings'}
-          </button>
-  
-          {/* Inventory toggle button */}
-          {isInventoryVisible ? null : (
-  <button
-    className="toggle-inventory-button"
-    onClick={() => setIsInventoryVisible(!isInventoryVisible)}
-    onTouchStart={() => setIsInventoryVisible(!isInventoryVisible)}
-  >
-    <i className="fas fa-window-maximize"></i> Inventory
-            </button>
-          )}
+
+      <nav className="top-nav navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a className="navbar-brand" href="#">
+          Duncraw
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <button className="btn btn-primary" onClick={toggleSettingsVisibility}>
+                {isSettingsVisible ? 'Hide Settings' : 'Show Settings'}
+              </button>
+            </li>
+            {!isInventoryVisible && (
+              <li className="nav-item">
+                <button
+                  className="btn btn-primary toggle-inventory-button"
+                  onClick={() => setIsInventoryVisible(!isInventoryVisible)}
+                >
+                  <i className="fas fa-window-maximize"></i> Inventory
+                </button>
+              </li>
+            )}
+          </ul>
         </div>
       </nav>
-  
-  
+
       <div className="content">
-        <h1>Duncraw</h1>
+        <h1 className="mt-5">Duncraw</h1>
         {!userName ? (
-          <div className="game-title">
-            <input
+          <div className="game-title mt-5">
+            <Form.Control
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
               placeholder="Enter your name..."
             />
-            <button onClick={() => startGame(userInput)}>Start Game</button>
+            <Button className="mt-2" onClick={() => startGame(userInput)}>
+              Start Game
+            </Button>
           </div>
         ) : (
           <div>
-            <div className="narrative-text">
+            <div className="narrative-text mt-5">
               <p>
                 {typedText
                   .split(/\b(\w+)\b/)
@@ -274,27 +271,30 @@ const startGame = (name) => {
                       currentElement.validCommands &&
                       currentElement.validCommands.includes(word.toLowerCase());
                     return (
-                      <span key={index} style={{ color: isKeyword ? 'green' : 'inherit' }}>
+                      <span key={index} className={isKeyword ? 'valid-command' : ''}>
                         {word}
                       </span>
                     );
                   })}
               </p>
             </div>
-            <div className="choices">
+            <div className="choices mt-4">
               {currentElement?.choices.map((choice) =>
                 choice.id === 'freeform' ? (
-                  <div key={choice.id}>
-                    <input
+                  <div key={choice.id} className="mt-3">
+                    <Form.Control
                       type="text"
                       value={userCommand}
                       onChange={(e) => setUserCommand(e.target.value)}
                     />
-                    <button onClick={() => handleChoiceClick(choice)}>Submit</button>
+                    <Button className="mt-2" onClick={() => handleChoiceClick(choice)}>
+                      Submit
+                    </Button>
                   </div>
                 ) : (
-                  <button
+                  <Button
                     key={choice.id}
+                    className="mt-3"
                     onClick={() => {
                       if (choice.item) {
                         addItemToInventory(choice.item);
@@ -303,7 +303,7 @@ const startGame = (name) => {
                     }}
                   >
                     {choice.text}
-                  </button>
+                  </Button>
                 )
               )}
             </div>
@@ -314,96 +314,86 @@ const startGame = (name) => {
         <Draggable>
           <div className="draggable-inventory">
             <div className="inventory-box">
-              <button
+              <Button
                 className="toggle-inventory-button"
                 onClick={() => setIsInventoryVisible(!isInventoryVisible)}
-                onTouchStart={() => setIsInventoryVisible(!isInventoryVisible)}
               >
                 <i className="fas fa-window-minimize"></i>
-              </button>
+              </Button>
               <div className="inventory-content">
                 <p>Inventory & Companion:</p>
                 <ul>
                   {inventory.length === 0 ? (
-                    <p className="empty-inventory"></p>
+                    <p className="empty-inventory">No items in inventory.</p>
                   ) : (
                     inventory.map((item, index) => (
                       <li key={index}>
                         <div>
                           <strong>{item.name}</strong>
                           <h5>{item.description}</h5>
-                      </div>
-                    </li>
-                  ))
-                )}
-              </ul>
+                        </div>
+                      </li>
+                    ))
+                  )}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </Draggable>
-    )}
-    {isSettingsVisible && (
-      <div className="settings-box">
-        <h2>Settings</h2>
-        <div className="typing-speed-controls">
-          <h3>Typing Speed:</h3>
-          <label>
-            <input
+        </Draggable>
+      )}
+      {isSettingsVisible && (
+        <div className="settings-box">
+          <h2>Settings</h2>
+          <div className="typing-speed-controls">
+            <h3>Typing Speed:</h3>
+            <Form.Check
               type="radio"
-              value="slow"
+              id="slow"
+              label="Slow"
               checked={typingSpeed === 'slow'}
               onChange={() => changeTypingSpeed('slow')}
             />
-            Slow
-          </label>
-          <label>
-            <input
+            <Form.Check
               type="radio"
-              value="medium"
+              id="medium"
+              label="Medium"
               checked={typingSpeed === 'medium'}
               onChange={() => changeTypingSpeed('medium')}
             />
-            Medium
-          </label>
-          <label>
-            <input
+            <Form.Check
               type="radio"
-              value="fast"
+              id="fast"
+              label="Fast"
               checked={typingSpeed === 'fast'}
               onChange={() => changeTypingSpeed('fast')}
             />
-            Fast
-          </label>
-          <label>
-            <input
+            <Form.Check
               type="radio"
-              value="off"
+              id="off"
+              label="Off"
               checked={typingSpeed === 'off'}
               onChange={() => changeTypingSpeed('off')}
             />
-            Off
-          </label>
-        </div>
-        <div className="image-settings">
-          <h3>Image Settings</h3>
-          <button onClick={() => setIsImageVisible(!isImageVisible)}>
-            {isImageVisible ? 'Hide Image' : 'Show Image'}
-          </button>
-        </div>
+          </div>
+          <div className="image-settings">
+            <h3>Image Settings</h3>
+            <Button onClick={() => setIsImageVisible(!isImageVisible)}>
+              {isImageVisible ? 'Hide Image' : 'Show Image'}
+            </Button>
+          </div>
 
-        {/* Music player */}
-        <div className="music-controls">
-          <h3>Background Music</h3>
-          <button onClick={previousSong}>Previous</button>
-          <button onClick={playOrPauseSong}>{isPlaying ? 'Pause' : 'Play'}</button>
-          <button onClick={nextSong}>Next</button>
-          <input type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
+          <div className="music-controls">
+            <h3>Background Music</h3>
+            <Button onClick={previousSong}>Previous</Button>
+            <Button onClick={playOrPauseSong}>{isPlaying ? 'Pause' : 'Play'}</Button>
+            <Button onClick={nextSong}>Next</Button>
+            <Form.Control type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
+          </div>
+          <div className="hints-controls">{/* Add your hints controls here */}</div>
         </div>
-        <div className="hints-controls">{/* Add your hints controls here */}</div>
-      </div>
-    )}
-  </div>
-);
+      )}
+    </div>
+  );
 }
 
 export default App;

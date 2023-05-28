@@ -117,29 +117,50 @@ function App() {
   }, [isBGMPlaying]);
   // Music player above
 
-  const handleChoiceClick = (choice) => {
-    if (choice.id === 'freeform') {
-      handleUserCommand(userCommand);
-    } else {
-      const nextElement = storyElements.find((el) => el.id === choice.nextElement);
-      if (nextElement) {
-        if (nextElement.inventoryAction) {
-          addItemToInventory(nextElement.inventoryAction.item);
-        }
-        setGameText(nextElement.text);
-        setCurrentElement(nextElement);
-      } else {
-        console.error(`Next element with ID '${choice.nextElement}' not found.`);
-      }
-    }
-  };
-
+  
   const addItemToInventory = (item) => {
     const isItemInInventory = inventory.some((existingItem) => existingItem.name === item.name);
     if (!isItemInInventory) {
       setInventory((prevInventory) => [...prevInventory, item]);
     }
   };
+  const removeItemFromInventory = (itemToRemove) => {
+    console.log("HEYYY I WAS USED");
+    setInventory((prevInventory) => {
+      console.log(prevInventory); // Check the previous inventory state
+      const updatedInventory = prevInventory.filter((item) => item.name !== itemToRemove.name);
+      console.log(updatedInventory); // Check the updated inventory state
+      return updatedInventory;
+    });
+  };
+  const inventoryActions = {
+    add: addItemToInventory,
+    remove: removeItemFromInventory
+};
+
+const handleChoiceClick = (choice) => {
+  if (choice.id === 'freeform') return handleUserCommand(userCommand);
+
+  const nextElement = storyElements.find((el) => el.id === choice.nextElement);
+
+  if (!nextElement) return console.error(`Next element with ID '${choice.nextElement}' not found.`);
+
+  console.log('Next Element:', nextElement);
+
+  if (nextElement.inventoryAction) {
+    console.log('Inventory Action:', nextElement.inventoryAction);
+    if (nextElement.inventoryAction.type === 'add') {
+      console.log('Adding item:', nextElement.inventoryAction.item);
+      inventoryActions.add(nextElement.inventoryAction.item);
+    } else if (nextElement.inventoryAction.type === 'remove') {
+      console.log('Removing item:', nextElement.inventoryAction.item);
+      inventoryActions.remove(nextElement.inventoryAction.item);
+    }
+  }
+
+  setGameText(nextElement.text);
+  setCurrentElement(nextElement);
+};
 
   const handleUserCommand = (userCommand) => {
     const lowerCaseUserCommand = userCommand.toLowerCase();

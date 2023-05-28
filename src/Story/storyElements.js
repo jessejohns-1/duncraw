@@ -185,9 +185,12 @@ const storyElements = [
   id: 'door',
   background: room,
   text: "You approach the door, your only gateway to the outside world. As you try the doorknob, you realize it is locked from the inside. A feeling of confinement washes over you, fueling your desire to escape. You search your pockets and find a small key—the one you discovered earlier. With a surge of hope, you insert the key into the lock and turn it.\n\nClick! The lock disengages, and the door creaks open, revealing a sliver of freedom beyond. A rush of fresh air greets your senses, a tantalizing reminder of the vast possibilities that lie beyond these walls.\n\nWith each step towards the open door, you leave behind the confines of the room. As the door closes behind you, a mixture of trepidation and excitement fills your heart. The world outside beckons, ready to unfold its wonders and challenges. The journey awaits, and you are prepared to embrace it.",
-  validCommands: ['back'],
   choices: [
-    { id: 'continue', text: "continue", nextElement: 'hallway' },
+    {
+      id: 'continue',
+      text: 'continue',
+      nextElement: 'hallway',
+    },
   ],
 },
 ///////////keyhole
@@ -198,6 +201,13 @@ const storyElements = [
   id: 'hallway',
   background: hallway,
   text: "You step out of the room and find yourself in a dimly lit hallway, the faded wallpaper peeling off the walls. The air is heavy with a musty scent, a reminder of neglect and time's relentless march. The hallway stretches out before you, its length disappearing into darkness. A flickering lightbulb intermittently illuminates the corridor, casting eerie shadows that dance on the walls.\n\nAs you take your first steps, a sense of unease settles in. Each creaking floorboard beneath your feet echoes through the silence, amplifying the emptiness of the building. The doors along the hallway stand closed and weathered, hiding their secrets within. You can't help but wonder what stories lie behind those doors—tales of joy, sorrow, and forgotten dreams.\n\nThe sound of distant footsteps echoes through the hall, making you pause. Is someone else here, or is it merely an echo of memories long past? The uncertainty gnaws at you, heightening your awareness of the unfamiliar surroundings.\n\nYou steel yourself and continue down the hallway, guided by a mix of curiosity and trepidation. The unknown awaits, and with each step, you move further into the heart of the building, yearning to uncover the mysteries that shroud this forgotten place.",
+  inventoryAction: {
+    type: 'remove',
+    item: {
+      name: 'mysterious key',
+      type: 'item',
+    },
+  },
   validCommands: ['back'],
   choices: [
     { id: 'forward', text: "Continue down the hallway", nextElement: 'encounter' },
@@ -262,7 +272,6 @@ const storyElements = [
         id: 'continue_search',
         background: hallway,
         text: "As you press on, the air grows heavier, filled with a palpable sense of foreboding. The dimly lit corridors seem to stretch endlessly, their paths twisting and turning like a maze. Whispers, faint and elusive, brush against your ears, taunting you with fragments of forgotten secrets.\n\nYou follow the trail of whispers, guided by an invisible hand. Each step forward feels like a step deeper into the heart of darkness, where the truth awaits. The building itself seems to come alive, its creaks and groans forming an eerie symphony that echoes through the empty halls.\n\nSuddenly, you come across a door. Unlike the other locked and boarded entrances, this one stands ajar, inviting you to enter. The hinges groan in protest as you push it open, revealing a room engulfed in shadows.\n\nStepping inside, you feel a chill crawl up your spine. The room is filled with forgotten remnants of the past—a dusty desk covered in faded papers, an old chair with a worn-out cushion, and an abandoned photo frame, its glass cracked and shattered.\n\nBut your attention is drawn to a single object—a tattered journal lying on the desk. Its pages whisper secrets, promising answers to the mysteries that have plagued you.\n\nWith trembling hands, you reach for the journal, its weight heavy with anticipation. As you open it, the words on the pages come alive, revealing a tale of tragedy and loss. Could this journal hold the key to Sheena's disappearance?\n\nYou settle into the chair, your mind consumed by the haunting words of the journal. Time slips away as you immerse yourself in the story, hoping to uncover the truth and bring Sheena back from the depths of this enigmatic place.",
-        validCommands: ['back'],
         choices: [
         { id: 'read_journal', text: "Read the journal", nextElement: 'read_journal' },
         ],
@@ -270,8 +279,8 @@ const storyElements = [
         {
           id: 'read_journal',
           background: room,
+          image: "journal",
           text: "You open the tattered journal, its fragile pages yielding to your touch. As you begin to read, the words transport you to another time and place. The entries are filled with raw emotion and intimate thoughts, as if someone poured their heart onto the paper. But something feels strangely familiar about the writing, as if it resonates with a voice you've encountered before.\n\nThe journal tells a haunting tale of a lost soul trapped within the very walls of this building—a soul desperate to escape its eternal torment. The entries speak of a woman, her presence entwined with the writer's existence, but the details remain shrouded in ambiguity.\n\nAs you delve deeper into the journal, a sense of unease washes over you. The entries become more fragmented and disjointed, as if the writer's mind was unraveling. Words like 'forgotten whispers,' 'sacrifice,' and 'eternal prison' leap off the pages, fueling your determination to uncover the truth.\n\nBut then, as you turn the final page, a chilling revelation sends a shiver down your spine. The handwriting abruptly changes, as if a different presence has taken hold of the journal. The entries morph into an enigmatic account, hinting at a dark force lurking within the depths of the building.\n\nYou can't help but wonder who penned these final entries, and what or if there is aconnection to Sheena's disappearance or how you got here. The journal has become a cryptic artifact, holding the secrets of this place and the key to finding Sheena.\n\nWith newfound urgency, you close the journal and tuck it away, knowing that you must confront the specter of this forgotten past and unravel the mystery that has entangled you and Sheena in its grip.",
-          validCommands: ['back'],
           choices: [
             { id: 'confront_past', text: "TO BE CONTINUED", nextElement: 'confront_past' },
           ],

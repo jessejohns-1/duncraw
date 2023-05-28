@@ -241,6 +241,7 @@ function App() {
       <div className="content">
         {!userName ? (
           <div className="game-title mt-5">
+            <h1>Duncraw</h1>
             <Form.Control
               type="text"
               value={userInput}

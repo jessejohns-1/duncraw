@@ -27,10 +27,11 @@ body {
 }
 
 .draggable-inventory {
+  
   position: fixed;
   top: 10px;
   right: 10px;
-  z-index: 1000;
+  z-index: 1001
 }
 
 .content {
@@ -151,6 +152,8 @@ button:hover {
   left: 10px;
   z-index: 999;
   background: linear-gradient(to right, rgba(128, 0, 128, 0.5), rgba(255, 0, 255, 0.5)); /* Transparent Purple to Transparent Pink */
+  top: 110px; /* Adjust the top position as needed */
+  z-index: 1001; /* Increase the z-index to ensure it appears above other elements */
 }
   strong {
   color: #ffffff; /* Purple */
@@ -160,6 +163,11 @@ button:hover {
     justify-content: center; /* align horizontally */
     align-items: center; /* align vertically */
     height: 100%; /* you'll need a height */
+    font-family: 'Arial', sans-serif; /* add the desired font */
+    font-size: 18px; /* adjust the font size as needed */
+    font-weight: bold; /* add font weight if desired */
+    color: #ffffff; /* add text color */
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.98); /* add text shadow if desired */
   }
   
   .music-controls {

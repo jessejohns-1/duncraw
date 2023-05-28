@@ -201,6 +201,14 @@ function App() {
     return typingStopper;
   }, [currentElement, isTypingEffectEnabled, typingSpeed]);
 
+  const handleInventoryMinimize = () => {
+    setIsInventoryVisible(!isInventoryVisible);
+  };
+
+  const handleInventoryTouchMinimize = () => {
+    setIsInventoryVisible(!isInventoryVisible);
+  };
+
   return (
     <div className="App" style={getBackgroundStyle()}>
       <div className="image-container">
@@ -236,6 +244,7 @@ function App() {
                 <button
                   className="btn btn-primary toggle-inventory-button"
                   onClick={() => setIsInventoryVisible(!isInventoryVisible)}
+                  onTouchEnd={handleInventoryTouchMinimize}
                 >
                   <i className="fas fa-window-maximize"></i> Inventory
                 </button>
@@ -317,6 +326,7 @@ function App() {
               <Button
                 className="toggle-inventory-button"
                 onClick={() => setIsInventoryVisible(!isInventoryVisible)}
+                onTouchEnd={handleInventoryTouchMinimize}
               >
                 <i className="fas fa-window-minimize"></i>
               </Button>

@@ -200,9 +200,49 @@ const storyElements = [
   text: "You step out of the room and find yourself in a dimly lit hallway, the faded wallpaper peeling off the walls. The air is heavy with a musty scent, a reminder of neglect and time's relentless march. The hallway stretches out before you, its length disappearing into darkness. A flickering lightbulb intermittently illuminates the corridor, casting eerie shadows that dance on the walls.\n\nAs you take your first steps, a sense of unease settles in. Each creaking floorboard beneath your feet echoes through the silence, amplifying the emptiness of the building. The doors along the hallway stand closed and weathered, hiding their secrets within. You can't help but wonder what stories lie behind those doors—tales of joy, sorrow, and forgotten dreams.\n\nThe sound of distant footsteps echoes through the hall, making you pause. Is someone else here, or is it merely an echo of memories long past? The uncertainty gnaws at you, heightening your awareness of the unfamiliar surroundings.\n\nYou steel yourself and continue down the hallway, guided by a mix of curiosity and trepidation. The unknown awaits, and with each step, you move further into the heart of the building, yearning to uncover the mysteries that shroud this forgotten place.",
   validCommands: ['back'],
   choices: [
-    { id: 'back', text: "to be continued", nextElement: 'null' },
+    { id: 'forward', text: "Continue down the hallway", nextElement: 'encounter' },
   ],
 },
+{
+  id: 'encounter',
+  background: hallway,
+  text: "Continuing down the hallway, the echo of your footsteps is suddenly met by another set of sounds. As you turn the corner, you come face to face with a young woman. She has an aura of mystery about her, her eyes reflecting the flickering lightbulb above. She looks surprised to see you but quickly regains her composure.\n\n'Oh, hello,' she says, her voice as soft as a whisper. 'You must be new here.' She introduces herself as Sheena, a resident of the building. You can't help but wonder what she means by 'new here', but her friendly demeanor puts you at ease.\n\nLyla's presence brings a sense of life to the otherwise dreary building, and you are intrigued to learn more about her and her connection to this place.",
+  character: 'sheena',
+  image: 'sheena',
+  choices: [
+    { id: 'ask', text: "Ask about her", nextElement: 'about_sheena' },
+  ],
+},
+{
+  id: 'about_sheena',
+  background: hallway,
+  text: "'I've been living here for quite some time,' Sheena tells you. Her voice carries a hint of melancholy, yet her eyes glint with an unyielding spirit. 'This place has its quirks, but it's home to me.'\n\nShe explains that she found solace in the quiet hallways and abandoned rooms after a turbulent past. Her words paint a picture of resilience in the face of adversity and how this forgotten building became her sanctuary.\n\nHer story leaves you with a sense of admiration for her strength and the courage to call such a place home. The more you talk to Sheena, the more the building begins to feel less daunting.",
+  character: 'sheena',
+  image: 'sheena',
+  choices: [
+  { id: 'ask_building', text: "Ask about the building", nextElement: 'about_building' },
+  ],
+  },
+  {
+  id: 'about_building',
+  background: hallway,
+  text: "'This old place?' Sheena starts, a smile playing on her lips. 'It's seen better days. But it has character, wouldn't you agree?' She explains that the building used to be a thriving place, full of life and laughter, before a series of unfortunate events led to its current state of abandonment.\n\nAs she shares its history, you can almost hear the echoes of past lives within these walls—lost echoes that now only Sheena and you can hear. The building, with its peeling wallpaper and creaking floors, seems to take on a new light in your eyes.\n\nSheena's stories about the building intertwine with her own, further deepening your understanding of her and this place.",
+  character: 'sheena',
+  image: 'sheena',
+  choices: [
+
+  { id: 'continue', text: "Continue exploring", nextElement: 'vanish' },
+  ],
+  },
+  {
+  id: 'vanish',
+  background: hallway,
+  text: "After talking with Sheena, you give her a nod and begin to move further into the hallway. As you take a few steps, a thought occurs to you. You turn around to ask Sheena another question, but to your surprise, she's no longer there. You look around, but she's nowhere to be seen, as if she vanished into thin air.\n\nPuzzled, you continue down the hallway, only to find that most of the rooms are boarded up, their secrets sealed off from prying eyes. The sense of unease returns, stronger this time. It's as if the building has you trapped within its labyrinthine passages, the only exit an enigma.\n\nYou can't help but wonder where Sheena disappeared to. Could she be hiding behind one of these barricaded doors, or has she truly vanished, just another memory consumed by the building?",
+  validCommands: ['back'],
+  choices: [
+  { id: 'search', text: "Search for Sheena", nextElement: 'search_sheena' },
+  ],
+  },
 ];
 
 export default storyElements;

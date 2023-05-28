@@ -239,7 +239,6 @@ function App() {
       </Navbar>
 
       <div className="content">
-        <h1 className="mt-5">Duncraw</h1>
         {!userName ? (
           <div className="game-title mt-5">
             <Form.Control

@@ -8,7 +8,10 @@ import track2 from './music/track2.mp3';
 import track3 from './music/track3.mp3';
 import track4 from './music/track4.mp3';
 import imageMap from './Components/imageMap';
+import { Button, Navbar, Nav, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Songs
 const songs = [track1, track2, track3, track4];
 
 function App() {
@@ -35,6 +38,7 @@ function App() {
     setIsSettingsVisible(!isSettingsVisible);
   };
 
+  // Music player
   useEffect(() => {
     bgm.current = new Audio(songs[currentSongIndex]);
     bgm.current.loop = false;
@@ -111,6 +115,7 @@ function App() {
   useEffect(() => {
     isBGMPlaying ? bgm.current.play() : bgm.current.pause();
   }, [isBGMPlaying]);
+  // Music player above
 
   const handleChoiceClick = (choice) => {
     if (choice.id === 'freeform') {
@@ -211,70 +216,76 @@ function App() {
           <img src={imageMap[currentElement.image]} alt={currentElement.image} className="image" />
         )}
       </div>
-      <nav className="navbar">
-        <div className="navbar-brand">Duncraw</div>
-        <div className="navbar-buttons">
-          <button className="button-settings" onClick={toggleSettingsVisibility}>
-            {isSettingsVisible ? 'Hide Settings' : 'Show Settings'}
-          </button>
-          {!isInventoryVisible && (
-            <button
-              className="toggle-inventory-button"
-              onClick={() => setIsInventoryVisible(!isInventoryVisible)}
-              onTouchEnd={handleInventoryTouchMinimize}
-            >
-              <i className="fas fa-window-maximize"></i> Inventory
-            </button>
-          )}
-        </div>
-      </nav>
+      <Navbar bg="dark" variant="dark" fixed="top">
+        <Navbar.Brand href="#">Duncraw</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarNav" />
+        <Navbar.Collapse id="navbarNav" className="justify-content-end">
+          <Nav>
+            <Button variant="primary" onClick={toggleSettingsVisibility}>
+              {isSettingsVisible ? 'Hide Settings' : 'Show Settings'}
+            </Button>
+            {!isInventoryVisible && (
+              <Button
+                variant="primary"
+                className="toggle-inventory-button"
+                onClick={() => setIsInventoryVisible(!isInventoryVisible)}
+                onTouchEnd={handleInventoryTouchMinimize}
+              >
+                <i className="fas fa-window-maximize"></i> Inventory
+              </Button>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
 
       <div className="content">
         <h1 className="mt-5">Duncraw</h1>
         {!userName ? (
           <div className="game-title mt-5">
-            <input
+            <Form.Control
               type="text"
               value={userInput}
               onChange={(e) => setUserInput(e.target.value)}
               placeholder="Enter your name..."
             />
-            <button className="mt-2" onClick={() => startGame(userInput)}>
+            <Button className="mt-2" onClick={() => startGame(userInput)}>
               Start Game
-            </button>
+            </Button>
           </div>
         ) : (
           <div>
             <div className="narrative-text mt-5">
               <p>
-                {typedText.split(/\b(\w+)\b/).map((word, index) => {
-                  const isKeyword =
-                    currentElement &&
-                    currentElement.validCommands &&
-                    currentElement.validCommands.includes(word.toLowerCase());
-                  return (
-                    <span key={index} className={isKeyword ? 'valid-command' : ''}>
-                      {word}
-                    </span>
-                  );
-                })}
+                {typedText
+                  .split(/\b(\w+)\b/)
+                  .map((word, index) => {
+                    const isKeyword =
+                      currentElement &&
+                      currentElement.validCommands &&
+                      currentElement.validCommands.includes(word.toLowerCase());
+                    return (
+                      <span key={index} className={isKeyword ? 'valid-command' : ''}>
+                        {word}
+                      </span>
+                    );
+                  })}
               </p>
             </div>
             <div className="choices mt-4">
               {currentElement?.choices.map((choice) =>
                 choice.id === 'freeform' ? (
                   <div key={choice.id} className="mt-3">
-                    <input
+                    <Form.Control
                       type="text"
                       value={userCommand}
                       onChange={(e) => setUserCommand(e.target.value)}
                     />
-                    <button className="mt-2" onClick={() => handleChoiceClick(choice)}>
+                    <Button className="mt-2" onClick={() => handleChoiceClick(choice)}>
                       Submit
-                    </button>
+                    </Button>
                   </div>
                 ) : (
-                  <button
+                  <Button
                     key={choice.id}
                     className="mt-3"
                     onClick={() => {
@@ -285,25 +296,24 @@ function App() {
                     }}
                   >
                     {choice.text}
-                  </button>
+                  </Button>
                 )
               )}
             </div>
           </div>
         )}
       </div>
-
       {isInventoryVisible && (
         <Draggable>
           <div className="draggable-inventory">
             <div className="inventory-box">
-              <button
+              <Button
                 className="toggle-inventory-button"
                 onClick={() => setIsInventoryVisible(!isInventoryVisible)}
                 onTouchEnd={handleInventoryTouchMinimize}
               >
                 <i className="fas fa-window-minimize"></i>
-              </button>
+              </Button>
               <div className="inventory-content">
                 <p>Inventory & Companion:</p>
                 <ul>
@@ -325,69 +335,53 @@ function App() {
           </div>
         </Draggable>
       )}
-
       {isSettingsVisible && (
         <div className="settings-box">
           <h2>Settings</h2>
           <div className="typing-speed-controls">
             <h3>Typing Speed:</h3>
-            <label>
-              <input
-                type="radio"
-                value="slow"
-                checked={typingSpeed === 'slow'}
-                onChange={() => changeTypingSpeed('slow')}
-              />
-              Slow
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="medium"
-                checked={typingSpeed === 'medium'}
-                onChange={() => changeTypingSpeed('medium')}
-              />
-              Medium
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="fast"
-                checked={typingSpeed === 'fast'}
-                onChange={() => changeTypingSpeed('fast')}
-              />
-              Fast
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="off"
-                checked={typingSpeed === 'off'}
-                onChange={() => changeTypingSpeed('off')}
-              />
-              Off
-            </label>
+            <Form.Check
+              type="radio"
+              id="slow"
+              label="Slow"
+              checked={typingSpeed === 'slow'}
+              onChange={() => changeTypingSpeed('slow')}
+            />
+            <Form.Check
+              type="radio"
+              id="medium"
+              label="Medium"
+              checked={typingSpeed === 'medium'}
+              onChange={() => changeTypingSpeed('medium')}
+            />
+            <Form.Check
+              type="radio"
+              id="fast"
+              label="Fast"
+              checked={typingSpeed === 'fast'}
+              onChange={() => changeTypingSpeed('fast')}
+            />
+            <Form.Check
+              type="radio"
+              id="off"
+              label="Off"
+              checked={typingSpeed === 'off'}
+              onChange={() => changeTypingSpeed('off')}
+            />
           </div>
           <div className="image-settings">
             <h3>Image Settings</h3>
-            <button onClick={() => setIsImageVisible(!isImageVisible)}>
+            <Button onClick={() => setIsImageVisible(!isImageVisible)}>
               {isImageVisible ? 'Hide Image' : 'Show Image'}
-            </button>
+            </Button>
           </div>
 
           <div className="music-controls">
             <h3>Background Music</h3>
-            <button onClick={previousSong}>Previous</button>
-            <button onClick={playOrPauseSong}>{isPlaying ? 'Pause' : 'Play'}</button>
-            <button onClick={nextSong}>Next</button>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={changeVolume}
-            />
+            <Button onClick={previousSong}>Previous</Button>
+            <Button onClick={playOrPauseSong}>{isPlaying ? 'Pause' : 'Play'}</Button>
+            <Button onClick={nextSong}>Next</Button>
+            <Form.Control type="range" min="0" max="1" step="0.01" value={volume} onChange={changeVolume} />
           </div>
           <div className="hints-controls">{/* Add your hints controls here */}</div>
         </div>

@@ -206,7 +206,7 @@ const storyElements = [
 {
   id: 'encounter',
   background: hallway,
-  text: "Continuing down the hallway, the echo of your footsteps is suddenly met by another set of sounds. As you turn the corner, you come face to face with a young woman. She has an aura of mystery about her, her eyes reflecting the flickering lightbulb above. She looks surprised to see you but quickly regains her composure.\n\n'Oh, hello,' she says, her voice as soft as a whisper. 'You must be new here.' She introduces herself as Sheena, a resident of the building. You can't help but wonder what she means by 'new here', but her friendly demeanor puts you at ease.\n\nLyla's presence brings a sense of life to the otherwise dreary building, and you are intrigued to learn more about her and her connection to this place.",
+  text: "Continuing down the hallway, the echo of your footsteps is suddenly met by another set of sounds. As you turn the corner, you come face to face with a young woman. She has an aura of mystery about her, her eyes reflecting the flickering lightbulb above. She looks surprised to see you but quickly regains her composure.\n\n'Oh, hello,' she says, her voice as soft as a whisper. 'You must be new here.' She introduces herself as Sheena, a resident of the building. You can't help but wonder what she means by 'new here', but her friendly demeanor puts you at ease.\n\Sheena's presence brings a sense of life to the otherwise dreary building, and you are intrigued to learn more about her and her connection to this place.",
   character: 'sheena',
   image: 'sheena',
   choices: [

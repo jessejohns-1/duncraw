@@ -242,7 +242,31 @@ const storyElements = [
   choices: [
   { id: 'search', text: "Search for Sheena", nextElement: 'search_sheena' },
   ],
-  },
+  },{
+    id: 'search_sheena',
+    background: hallway,
+    text: "You call out for Sheena, but only your echo responds, a chilling reminder of your solitude. Each footstep on the old, creaking floorboards resounds ominously in the silence, an eerie soundtrack to your mounting desperation.\n\nThe labyrinthine building closes in around you, the haunting shadows and dimly lit corridors playing tricks on your mind. As you pass the boarded-up rooms and locked doors, you're gripped by a disconcerting realization—you don't recall how you arrived here. Like a spectral ship lost in a sea of fog, your memory of your journey to this place is obscure.\n\nA cold shiver creeps down your spine, your heart pounding in your chest like a drum of war. Every nerve in your body screams that something is amiss. A sense of dread weighs heavily on your shoulders as you begin to question the reality of your situation.\n\nThe specter of Sheena’s disappearance adds to the eeriness, her image fading like a wisp of smoke in the wind. Could she have been an apparition? A figure birthed from the very walls of this decrepit building, caught between the realm of the living and the echoes of the past?\n\nThe building's enigmatic aura thickens with every passing moment, a cryptic riddle written in dust and shadows. You know you must find answers, but the disquieting sensation of being watched makes your skin crawl. You can't shake off the feeling that the building itself is alive, observing you with unseen eyes, its breath the faint drafts of cold air seeping through the cracks.\n\nYour journey has turned into a surreal nightmare, the truth lying somewhere in the heart of this maze of decay and forgotten dreams. You press on, the flickering lightbulb casting your long, quivering shadow on the wall, a silent companion in your solitary exploration.",
+    validCommands: ['back'],
+    choices: [
+    { id: 'look_around', text: "Clook around", nextElement: 'look_around' },
+    ],
+    },{
+      id: 'look_around',
+      background: hallway,
+      text: "You take a moment to pause and observe your surroundings, hoping to glean any clues from the cryptic environment that surrounds you. The flickering lightbulb above casts dancing shadows on the peeling wallpaper, creating a surreal dance of light and darkness.\n\nYou notice an old, weathered painting hanging crookedly on the wall. Its colors have faded, and the subject matter is barely discernible. As you approach it, a gust of wind brushes against your cheek, rustling the painting and revealing a hidden message scrawled in faded ink.\n\nThe words are cryptic, a puzzle to unravel. They read: 'In the heart of darkness, lies the truth you seek. Follow the path of forgotten whispers and face the specter of your fears.' The message sends a shiver down your spine, but it also ignites a glimmer of hope within you. It seems like a clue, a breadcrumb left behind for you to follow.\n\nWith newfound determination, you decide to heed the message's advice. You will search for the path of forgotten whispers, hoping it will lead you closer to Sheena and the truth that haunts this place.\n\nYou take a deep breath, your heart pounding in anticipation, and continue your journey through the dimly lit corridors. Each step forward brings you closer to the heart of darkness, where the answers await, and where Sheena's fate may be revealed.",
+      validCommands: ['back'],
+      choices: [
+      { id: 'continue_search', text: "Continue searching", nextElement: 'continue_search' },
+      ],
+      },{
+        id: 'continue_search',
+        background: hallway,
+        text: "As you press on, the air grows heavier, filled with a palpable sense of foreboding. The dimly lit corridors seem to stretch endlessly, their paths twisting and turning like a labyrinth. Whispers, faint and elusive, brush against your ears, taunting you with fragments of forgotten secrets.\n\nYou follow the trail of whispers, guided by an invisible hand. Each step forward feels like a step deeper into the heart of darkness, where the truth awaits. The building itself seems to come alive, its creaks and groans forming an eerie symphony that echoes through the empty halls.\n\nSuddenly, you come across a door. Unlike the other locked and boarded entrances, this one stands ajar, inviting you to enter. The hinges groan in protest as you push it open, revealing a room engulfed in shadows.\n\nStepping inside, you feel a chill crawl up your spine. The room is filled with forgotten remnants of the past—a dusty desk covered in faded papers, an old chair with a worn-out cushion, and an abandoned photo frame, its glass cracked and shattered.\n\nBut your attention is drawn to a single object—a tattered journal lying on the desk. Its pages whisper secrets, promising answers to the mysteries that have plagued you.\n\nWith trembling hands, you reach for the journal, its weight heavy with anticipation. As you open it, the words on the pages come alive, revealing a tale of tragedy and loss. Could this journal hold the key to Sheena's disappearance?\n\nYou settle into the chair, your mind consumed by the haunting words of the journal. Time slips away as you immerse yourself in the story, hoping to uncover the truth and bring Sheena back from the depths of this enigmatic place.",
+        validCommands: ['back'],
+        choices: [
+        { id: 'read_journal', text: "Read the journal", nextElement: 'read_journal' },
+        ],
+        }
 ];
 
 export default storyElements;
